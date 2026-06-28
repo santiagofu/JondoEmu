@@ -20,7 +20,9 @@ This repository contains the complete architecture of the **Jondo** local emulat
 ### 🚧 Work In Progress (WIP)
 - [ ] **Inventory System**
 - [ ] **Character Stats (Characteristics)**
-- [ ] **NPCs and Dialogues**
+- [ ] **NPCs spawns and Dialogues**
+- [ ] **Fights**
+- [ ] **Monster Spawns**
 
 ---
 
