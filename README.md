@@ -1,95 +1,94 @@
 # Jondo Unity Emulator - Dofus 3.6.4.3
 
-Este repositorio contiene la arquitectura completa del emulador local **Jondo** diseñado para el cliente Unity de Dofus (versión 3.6.4.3), así como el mod cliente **JondoFix** para MelonLoader.
+This repository contains the complete architecture of the **Jondo** local emulator designed for the Unity client of Dofus (version 3.6.4.3), as well as the **JondoFix** client mod for MelonLoader.
 
-## 📊 Estado de la Emulación
+## 📊 Emulation Status
 
-### ✅ Funcionalidades Completadas / Emuladas
-- [x] **Emulación cliente-servidor-autenticación** (Zaap, HAAPI, Connection Server)
-- [x] **Elección de servidor**
-- [x] **Elección de personaje**
-- [x] **Carga de mundo (World / Game Node)**
-- [x] **Spawn del personaje**
-- [x] **Hover del nombre del personaje**
-- [x] **Movimiento**
-- [x] **Persistencia de la última casilla y mapa** en base de datos
-- [x] **Cambio de mapa**
-- [x] **Carga del mapa**
-- [x] **Cálculo de mapas adyacentes**
+### ✅ Completed / Emulated Features
+- [x] **Client-Server-Authentication Emulation** (Zaap, HAAPI, Connection Server)
+- [x] **Server Selection**
+- [x] **Character Selection**
+- [x] **World Loading (World / Game Node)**
+- [x] **Character Spawn**
+- [x] **Character Name Hover**
+- [x] **Movement**
+- [x] **Last Cell and Map Persistence** in Database
+- [x] **Map Change**
+- [x] **Map Loading**
+- [x] **Adjacent Maps Calculation**
 
-### 🚧 En Desarrollo (Work In Progress)
-- [ ] **Sistema de Inventario**
-- [ ] **Características del personaje (stats)**
-- [ ] **NPCs y diálogos**
-
----
-
-
-## 📂 Estructura del Repositorio
-
-* **`Jondo Emulator Launcher.exe`** (en la raíz): Ejecutable compilado listo para iniciar el servidor del emulador local (con todas sus DLLs dependientes y la carpeta `runtimes/`).
-* **`JondoFix.dll`** (en la raíz): Binario precompilado del mod cliente de MelonLoader listo para ser utilizado en el juego.
-* **[Jondo.Unity.sln](file:///C:/Jondo/Jondo%20Unity%20Emulator/Jondo.Unity.sln)**: Solución de Visual Studio que agrupa todos los subproyectos del emulador:
-  * **[Jondo.Unity.Launcher](file:///C:/Jondo/Jondo%20Unity%20Emulator/Jondo.Unity.Launcher)**: Punto de entrada del servidor, proxies, parser de red y base de datos local.
-  * **[Jondo.Unity.Core](file:///C:/Jondo/Jondo%20Unity%20Emulator/Jondo.Unity.Core)**: Capa de red básica y servidores TCP.
-  * **[Jondo.Unity.Auth](file:///C:/Jondo/Jondo%20Unity%20Emulator/Jondo.Unity.Auth)**: Servicio de autenticación.
-  * **[Jondo.Unity.Protocol](file:///C:/Jondo/Jondo%20Unity%20Emulator/Jondo.Unity.Protocol)**: Definiciones y buffers de protocolo (Protobuf).
-  * **[Jondo.Unity.World](file:///C:/Jondo/Jondo%20Unity%20Emulator/Jondo.Unity.World)**: Lógica del Game Node / servidor de mundo.
-* **[JondoFix](file:///C:/Jondo/Jondo%20Unity%20Emulator/JondoFix)**: Código fuente del mod de MelonLoader que redirecciona el cliente de Dofus hacia el servidor local y elude el chequeo de certificados SSL oficiales.
-* **[Dofus3 Defuscated Data](file:///C:/Jondo/Jondo%20Unity%20Emulator/Dofus3%20Defuscated%20Data)**: Dump de clases desofuscadas, encabezados de IL2CPP y scripts de análisis para Ghidra e IDA.
-* **[EspecificacionTecnica.md](file:///C:/Jondo/Jondo%20Unity%20Emulator/EspecificacionTecnica.md)**: Especificación detallada del protocolo, arquitectura de red, puertos y el doble rol sniffer en el puerto `5555`.
+### 🚧 Work In Progress (WIP)
+- [ ] **Inventory System**
+- [ ] **Character Stats (Characteristics)**
+- [ ] **NPCs and Dialogues**
 
 ---
 
-## 🚀 Guía de Inicio Rápido (Sin Compilar)
+## 📂 Repository Structure
 
-Cualquier persona puede clonar el repositorio y arrancar el emulador de inmediato con los archivos precompilados de la raíz.
-
-### Paso 1: Levantar el Emulador (Servidor)
-1. Ejecuta **`Jondo Emulator Launcher.exe`** en la raíz de este directorio.
-2. Esto iniciará de manera local:
-   - El puerto named pipe/TCP `15881` de Ankama Zaap API.
-   - El servidor HTTP HAAPI en el puerto `8888`.
-   - El Connection Server y Game Node en el puerto `5555`.
-   - El Chat Server seguro en el puerto `6337`.
-
----
-
-### Paso 2: Configurar el Cliente Dofus (MelonLoader & JondoFix)
-
-El cliente de Dofus oficial por defecto intenta conectarse a los servidores oficiales de Ankama y verifica los certificados de seguridad SSL/TLS. Para redirigirlo de forma local y segura, utilizamos **MelonLoader** y el mod **JondoFix**.
-
-#### 1. Instalar MelonLoader
-1. Descarga el instalador de **MelonLoader** (versión `0.6.x` o compatible con .NET 6) desde su repositorio oficial en GitHub: [MelonLoader Releases](https://github.com/LavaGang/MelonLoader/releases).
-2. Ejecuta el instalador y selecciona el archivo executable del cliente de Dofus (por ejemplo, `Dofus.exe` en tu carpeta de cliente de Dofus).
-3. Asegúrate de configurar la instalación para que use el runtime correspondiente (normalmente se detecta automáticamente como **IL2CPP** o **.NET 6**).
-4. Haz clic en **Install**. Esto creará carpetas como `MelonLoader/`, `Mods/` y `UserData/` en la carpeta del juego.
-
-#### 2. Cargar el mod JondoFix
-1. Ve a la raíz de este repositorio y copia el archivo precompilado **`JondoFix.dll`**.
-2. Pégalo dentro de la carpeta **`Mods/`** que se ha generado en el directorio de instalación de tu cliente de Dofus.
-3. Al iniciar el juego mediante el launcher oficial o directamente con el ejecutable modificado por MelonLoader, el mod se cargará de forma automática.
-
-#### ¿Qué hace JondoFix exactamente?
-* **Redirección de Red**: Intercepta sockets, Named Pipes y llamadas de DNS redirigiendo el tráfico web de Ankama a `localhost` (puertos `8888`, `5555`, etc.).
-* **Bypass de SSL**: Evita que las llamadas HTTPS hacia HAAPI y el Connection Server fallen por utilizar certificados locales autofirmados.
-* **Configuración del Entorno**: Injecta las variables de entorno necesarias (`ZAAP_PORT`, `ZAAP_HASH`, etc.) para engañar al cliente simulando que el Launcher oficial está corriendo de fondo.
+* **`Jondo Emulator Launcher.exe`** (in root): Precompiled executable ready to run the local emulator server (includes all dependent DLLs and the `runtimes/` directory).
+* **`JondoFix.dll`** (in root): Precompiled binary of the MelonLoader client mod ready for use in the game.
+* **[Jondo.Unity.sln](file:///C:/Jondo/Jondo%20Unity%20Emulator/Jondo.Unity.sln)**: Visual Studio solution grouping all subprojects of the emulator:
+  * **[Jondo.Unity.Launcher](file:///C:/Jondo/Jondo%20Unity%20Emulator/Jondo.Unity.Launcher)**: Server entry point, proxies, network parser, and local database.
+  * **[Jondo.Unity.Core](file:///C:/Jondo/Jondo%20Unity%20Emulator/Jondo.Unity.Core)**: Basic networking layer and TCP servers.
+  * **[Jondo.Unity.Auth](file:///C:/Jondo/Jondo%20Unity%20Emulator/Jondo.Unity.Auth)**: Authentication service.
+  * **[Jondo.Unity.Protocol](file:///C:/Jondo/Jondo%20Unity%20Emulator/Jondo.Unity.Protocol)**: Protocol buffers and message definitions (Protobuf).
+  * **[Jondo.Unity.World](file:///C:/Jondo/Jondo%20Unity%20Emulator/Jondo.Unity.World)**: Game Node / World server logic.
+* **[JondoFix](file:///C:/Jondo/Jondo%20Unity%20Emulator/JondoFix)**: MelonLoader client mod source code that redirects Dofus client traffic to the local server and bypasses official SSL certificate checks.
+* **[Dofus3 Defuscated Data](file:///C:/Jondo/Jondo%20Unity%20Emulator/Dofus3%20Defuscated%20Data)**: Deobfuscated class dumps, IL2CPP headers, and analysis scripts for Ghidra and IDA.
+* **[EspecificacionTecnica.md](file:///C:/Jondo/Jondo%20Unity%20Emulator/EspecificacionTecnica.md)**: Detailed specification of the protocol, network architecture, ports, and the double-role sniffer on port `5555`.
 
 ---
 
-## 🛠️ Desarrollo e Hilado Fino (Compilación desde Código)
+## 🚀 Quick Start Guide (No Compilation Required)
 
-Si deseas realizar modificaciones al emulador o al mod del cliente:
+Anyone can clone the repository and run the emulator immediately using the precompiled files in the root folder.
 
-### Compilar el Emulador
-Puedes abrir la solución **`Jondo.Unity.sln`** en Visual Studio 2022 o compilar directamente desde tu terminal con el comando:
+### Step 1: Run the Emulator (Server)
+1. Run **`Jondo Emulator Launcher.exe`** in the root of this directory.
+2. This will launch locally:
+   - The Ankama Zaap API named pipe/TCP port `15881`.
+   - The HTTP HAAPI server on port `8888`.
+   - The Connection Server and Game Node on port `5555`.
+   - The secure Chat Server on port `6337`.
+
+---
+
+### Step 2: Configure the Dofus Client (MelonLoader & JondoFix)
+
+By default, the official Dofus client tries to connect to the official Ankama servers and verifies SSL/TLS security certificates. To redirect it locally and securely, we use **MelonLoader** and the **JondoFix** mod.
+
+#### 1. Install MelonLoader
+1. Download the **MelonLoader** installer (version `0.6.x` or compatible with .NET 6) from its official GitHub repository: [MelonLoader Releases](https://github.com/LavaGang/MelonLoader/releases).
+2. Run the installer and select the executable file of the Dofus client (e.g., `Dofus.exe` in your Dofus client folder).
+3. Ensure the installation is configured to use the appropriate runtime (usually auto-detected as **IL2CPP** or **.NET 6**).
+4. Click **Install**. This will generate the `MelonLoader/`, `Mods/`, and `UserData/` folders in your game directory.
+
+#### 2. Load the JondoFix Mod
+1. Go to the root of this repository and copy the precompiled **`JondoFix.dll`** file.
+2. Paste it inside the **`Mods/`** folder created in your Dofus client installation directory.
+3. When you start the game via the official launcher or directly with the MelonLoader modified executable, the mod will load automatically.
+
+#### What does JondoFix do exactly?
+* **Network Redirection**: Intercepts sockets, Named Pipes, and DNS queries, redirecting Ankama web traffic to `localhost` (ports `8888`, `5555`, etc.).
+* **SSL Bypass**: Prevents HTTPS requests to HAAPI and the Connection Server from failing due to self-signed local certificates.
+* **Environment Configuration**: Injects the required environment variables (`ZAAP_PORT`, `ZAAP_HASH`, etc.) to fool the client into thinking the official launcher is running in the background.
+
+---
+
+## 🛠️ Development & Compilation (From Source)
+
+If you wish to make modifications to the emulator or the client mod:
+
+### Compiling the Emulator
+You can open the **`Jondo.Unity.sln`** solution in Visual Studio 2022 or build it directly from your terminal with:
 ```bash
 dotnet build -c Release
 ```
 
-### Compilar JondoFix
-El mod del cliente se puede compilar con:
+### Compiling JondoFix
+The client mod can be compiled with:
 ```bash
 dotnet build JondoFix/JondoFix.csproj -c Release
 ```
-El archivo DLL resultante se generará en `JondoFix/bin/Release/net6.0/JondoFix.dll`.
+The resulting DLL file will be generated at `JondoFix/bin/Release/net6.0/JondoFix.dll`.
