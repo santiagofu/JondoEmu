@@ -40,6 +40,15 @@ This repository contains the complete architecture of the **Jondo** local emulat
 
 ---
 
+## 💾 Database & Persistence
+
+The emulator uses two **SQLite** databases for local persistence, which are managed within the project launcher directory:
+* **`auth.db`**: Stores accounts, credentials, and authentication sessions.
+* **`world.db`**: Stores character data, inventories, positions, map persistence, and other world-related states.
+
+---
+
+
 ## 🚀 Quick Start Guide (No Compilation Required)
 
 Anyone can clone the repository and run the emulator immediately using the precompiled files in the root folder.
