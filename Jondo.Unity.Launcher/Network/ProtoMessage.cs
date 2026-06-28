@@ -1,0 +1,136 @@
+using System;
+using System.IO;
+using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
+
+namespace Jondo.Unity.Launcher.Network
+{
+    public class ProtoField
+    {
+        public int FieldNumber { get; set; }
+        public int WireType { get; set; }
+        public long VarIntValue { get; set; }
+        public byte[] BytesValue { get; set; } = Array.Empty<byte>();
+        public uint Fixed32Value { get; set; }
+        public ulong Fixed64Value { get; set; }
+    }
+
+    public class ProtoMessage
+    {
+        public List<ProtoField> Fields { get; set; } = new List<ProtoField>();
+
+        public static ProtoMessage Parse(byte[] data)
+        {
+            var msg = new ProtoMessage();
+            int pos = 0;
+            while (pos < data.Length)
+            {
+                uint tag = ReadVarInt(data, ref pos);
+                int wireType = (int)(tag & 7);
+                int fieldNum = (int)(tag >> 3);
+                var field = new ProtoField { FieldNumber = fieldNum, WireType = wireType };
+                if (wireType == 0)
+                {
+                    field.VarIntValue = (long)ReadVarInt64(data, ref pos);
+                }
+                else if (wireType == 1)
+                {
+                    field.Fixed64Value = BitConverter.ToUInt64(data, pos);
+                    pos += 8;
+                }
+                else if (wireType == 2)
+                {
+                    int len = (int)ReadVarInt(data, ref pos);
+                    field.BytesValue = new byte[len];
+                    Array.Copy(data, pos, field.BytesValue, 0, len);
+                    pos += len;
+                }
+                else if (wireType == 5)
+                {
+                    field.Fixed32Value = BitConverter.ToUInt32(data, pos);
+                    pos += 4;
+                }
+                else
+                {
+                    throw new Exception("Unsupported wire type: " + wireType);
+                }
+                msg.Fields.Add(field);
+            }
+            return msg;
+        }
+
+        public byte[] ToByteArray()
+        {
+            using var ms = new MemoryStream();
+            
+            // Sort fields in strictly ascending order by FieldNumber
+            // to guarantee compatibility with optimized client decodifiers.
+            var sortedFields = new List<ProtoField>(Fields);
+            sortedFields.Sort((a, b) => a.FieldNumber.CompareTo(b.FieldNumber));
+
+            foreach (var field in sortedFields)
+            {
+                WriteVarInt(ms, (ulong)((field.FieldNumber << 3) | field.WireType));
+                if (field.WireType == 0)
+                {
+                    WriteVarInt(ms, (ulong)field.VarIntValue);
+                }
+                else if (field.WireType == 1)
+                {
+                    byte[] bytes = BitConverter.GetBytes(field.Fixed64Value);
+                    ms.Write(bytes, 0, 8);
+                }
+                else if (field.WireType == 2)
+                {
+                    WriteVarInt(ms, (ulong)field.BytesValue.Length);
+                    ms.Write(field.BytesValue, 0, field.BytesValue.Length);
+                }
+                else if (field.WireType == 5)
+                {
+                    byte[] bytes = BitConverter.GetBytes(field.Fixed32Value);
+                    ms.Write(bytes, 0, 4);
+                }
+            }
+            return ms.ToArray();
+        }
+
+        private static uint ReadVarInt(byte[] data, ref int pos)
+        {
+            uint value = 0;
+            int shift = 0;
+            while (pos < data.Length)
+            {
+                byte b = data[pos++];
+                value |= (uint)(b & 0x7F) << shift;
+                if ((b & 0x80) == 0) break;
+                shift += 7;
+            }
+            return value;
+        }
+
+        private static ulong ReadVarInt64(byte[] data, ref int pos)
+        {
+            ulong value = 0;
+            int shift = 0;
+            while (pos < data.Length)
+            {
+                byte b = data[pos++];
+                value |= (ulong)(b & 0x7F) << shift;
+                if ((b & 0x80) == 0) break;
+                shift += 7;
+            }
+            return value;
+        }
+
+        public static void WriteVarInt(Stream stream, ulong value)
+        {
+            while (value >= 0x80)
+            {
+                stream.WriteByte((byte)((value & 0x7F) | 0x80));
+                value >>= 7;
+            }
+            stream.WriteByte((byte)value);
+        }
+    }
+}

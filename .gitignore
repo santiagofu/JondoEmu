@@ -1,0 +1,26 @@
+# Visual Studio/dotnet GitIgnore
+
+## Ignore Visual Studio files
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+## Ignore build outputs
+[Bb]in/
+[Oo]bj/
+[Log]/
+
+## Ignore Rider/Resharper/JetBrains files
+.idea/
+*.useroptions
+
+## Ignore packages
+packages/
+*.nuget.props
+*.nuget.targets
+
+## Ignore OS files
+.DS_Store
+Thumbs.db

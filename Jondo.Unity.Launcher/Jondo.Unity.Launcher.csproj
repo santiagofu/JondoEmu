@@ -1,0 +1,82 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>annotations</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="ApacheThrift" Version="0.23.0" />
+    <PackageReference Include="Google.Protobuf" Version="3.35.1" />
+    <PackageReference Include="Grpc.Tools" Version="2.81.1">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Data.Sqlite" Version="10.0.9" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Protobuf Include="Protocol\GameProtocol.proto" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Jondo.Unity.Protocol\Jondo.Unity.Protocol.csproj" />
+  </ItemGroup>
+
+  <!-- Auto-deploy: copies only compiled project files and direct non-framework dependencies to the root folder -->
+  <Target Name="DeployLauncher" AfterTargets="Publish">
+    <ItemGroup>
+      <PublishFiles Include="$(PublishDir)Jondo.Unity.Launcher.dll;
+                             $(PublishDir)Jondo.Unity.Launcher.pdb;
+                             $(PublishDir)Jondo.Unity.Launcher.deps.json;
+                             $(PublishDir)Jondo.Unity.Launcher.runtimeconfig.json;
+                             $(PublishDir)Jondo.Unity.Core.dll;
+                             $(PublishDir)Jondo.Unity.Core.pdb;
+                             $(PublishDir)Jondo.Unity.Protocol.dll;
+                             $(PublishDir)Jondo.Unity.Protocol.pdb;
+                             $(PublishDir)Google.Protobuf.dll;
+                             $(PublishDir)Thrift.dll;
+                             $(PublishDir)Microsoft.Data.Sqlite.dll;
+                             $(PublishDir)SQLitePCLRaw.core.dll;
+                             $(PublishDir)SQLitePCLRaw.provider.e_sqlite3.dll;
+                             $(PublishDir)SQLitePCLRaw.batteries_v2.dll" />
+    </ItemGroup>
+    <Copy SourceFiles="@(PublishFiles)"
+          DestinationFolder="$(MSBuildProjectDirectory)\..\"
+          OverwriteReadOnlyFiles="true"
+          SkipUnchangedFiles="true" />
+    <Copy SourceFiles="$(PublishDir)$(AssemblyName).exe"
+          DestinationFiles="$(MSBuildProjectDirectory)\..\Jondo Emulator Launcher.exe"
+          OverwriteReadOnlyFiles="true"
+          SkipUnchangedFiles="true" />
+    <!-- Copy the native SQLite binary from its runtime folder to the root folder -->
+    <Copy SourceFiles="$(PublishDir)runtimes\win-x64\native\e_sqlite3.dll"
+          DestinationFiles="$(MSBuildProjectDirectory)\..\e_sqlite3.dll"
+          OverwriteReadOnlyFiles="true"
+          SkipUnchangedFiles="true"
+          Condition="Exists('$(PublishDir)runtimes\win-x64\native\e_sqlite3.dll')" />
+    <Message Text="[Deploy] Clean deploy completed. Only emulator binaries and direct dependencies copied to root." Importance="high" />
+  </Target>
+
+  <!-- Prevent accidental pollution of the root directory by compiling/publishing directly to it -->
+  <Target Name="ValidatePublishDirectory" BeforeTargets="PrepareForPublish;BeforePublish">
+    <PropertyGroup>
+      <FullPublishDir>$([System.IO.Path]::GetFullPath('$(PublishDir)'))</FullPublishDir>
+      <FullRootDir>$([System.IO.Path]::GetFullPath('$(MSBuildProjectDirectory)\..\'))</FullRootDir>
+    </PropertyGroup>
+    <Error Condition="'$(FullPublishDir)' == '$(FullRootDir)' Or '$(FullPublishDir)' == '$(FullRootDir)\'" 
+           Text="[Error de Compilación] No publiques directamente en el directorio raíz del emulador. Esto contamina la carpeta con cientos de archivos de .NET. Publica sin especificar la raíz como salida y el deploy selectivo se encargará de copiar solo lo necesario." />
+  </Target>
+
+  <Target Name="ValidateOutputDirectory" BeforeTargets="BeforeBuild;BeforeRebuild">
+    <PropertyGroup>
+      <FullOutDir>$([System.IO.Path]::GetFullPath('$(OutDir)'))</FullOutDir>
+      <FullRootDir>$([System.IO.Path]::GetFullPath('$(MSBuildProjectDirectory)\..\'))</FullRootDir>
+    </PropertyGroup>
+    <Error Condition="'$(FullOutDir)' == '$(FullRootDir)' Or '$(FullOutDir)' == '$(FullRootDir)\'" 
+           Text="[Error de Compilación] No compiles directamente en el directorio raíz del emulador. Esto contamina la carpeta con cientos de archivos de .NET. Compila en la ruta por defecto (bin/) y el publish se encargará del deploy limpio." />
+  </Target>
+
+</Project>

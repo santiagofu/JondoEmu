@@ -1,0 +1,936 @@
+syntax = "proto3";
+
+option csharp_namespace = "Jondo.Unity.Protocol.Messages";
+
+// Auto-generated & Unified Protobuf definitions for Jondo Emulator
+
+message GameMapMovementRequestMessage {
+    repeated int32 path = 1;
+    int64 mapId = 2;
+    int64 field3 = 3;
+    bool field4 = 4;
+}
+
+enum hgz {
+  HGZ_EBYU = 0;
+  HGZ_EBYV = 1;
+  HGZ_EBYW = 2;
+}
+
+message hhf {
+  hgz flwv = 1;
+}
+
+message hhh {
+  hgz flxd = 1;
+}
+
+message hmt {
+}
+
+message ilc {
+  message ilb {
+    message ila {
+      repeated int32 fqfz = 1;
+      int32 fqga = 2;
+      repeated int32 fqgb = 3;
+    }
+
+  }
+
+  repeated ilc.ilb.ila fqgk = 1;
+}
+
+message iry {
+    int32 frgc = 1;
+    int32 frgd = 2;
+}
+
+message isf {
+    int32 frhd = 1;
+    int32 frhe = 2;
+}
+
+message isi {
+    int32 frhr = 1;
+    int32 frhs = 2;
+    int32 frht = 3;
+}
+
+message itp {
+  message ito {
+    enum itn {
+      ITN_EKQX = 0;
+      ITN_EKQY = 1;
+      ITN_EKQZ = 2;
+      ITN_EKRA = 3;
+      ITN_EKRB = 4;
+    }
+
+  }
+
+}
+
+message iub {
+  enum iua {
+    IUA_EKTH = 0;
+    IUA_EKTI = 1;
+    IUA_EKTJ = 2;
+  }
+
+}
+
+message jnx {
+  lct fuln = 1;
+}
+
+message joa {
+  int64 fuma = 1;
+  int32 fumb = 2;
+  int32 fumc = 3;
+}
+
+message jog {
+  int32 fump = 1;
+  int32 fumq = 2;
+  int32 fumr = 3;
+  lgz fums = 4;
+}
+
+message joh {
+  int64 fumw = 1;
+  int64 fumx = 2;
+}
+
+message joi {
+  int64 funb = 1;
+  bool fund = 2;
+  repeated int32 fune = 3;
+}
+
+message jol {
+  message jok {
+    message joj {
+      uint32 funi = 1;
+      uint32 funj = 2;
+      uint32 funk = 3;
+      uint32 funl = 4;
+      repeated string funm = 5;
+    }
+
+  }
+
+  jol.jok.joj funq = 1;
+  uint32 funr = 2;
+}
+
+message joo {
+  message jon {
+    enum jom {
+      JOM_EPHX = 0;
+      JOM_EPHY = 1;
+      JOM_EPHZ = 2;
+      JOM_EPIA = 3;
+      JOM_EPIB = 4;
+      JOM_EPIC = 5;
+      JOM_EPID = 6;
+    }
+
+  }
+
+  int64 funv = 1;
+  repeated int32 funw = 2;
+  bool funx = 3;
+  bool funy = 4;
+  int32 funz = 5;
+  string fuob = 6;
+  joo.jon.jom fuoc = 7;
+}
+
+message jos {
+  int32 fuou = 1;
+  bool fuov = 2;
+}
+
+enum jov {
+  JOV_EPJT = 0;
+  JOV_EPJU = 1;
+  JOV_EPJV = 2;
+  JOV_EPJW = 3;
+}
+
+message jpb {
+  enum joy {
+    JOY_EPKW = 0;
+    JOY_EPKX = 1;
+    JOY_EPKY = 2;
+    JOY_EPKZ = 4;
+  }
+
+  message jpa {
+    message joz {
+      string fupp = 1;
+      string fupq = 2;
+      string fupr = 3;
+      bool fups = 4;
+    }
+
+  }
+
+  jpb.jpa.joz fupw = 1;
+  jov fupx = 2;
+  jqb fupy = 3;
+  jpg fupz = 4;
+}
+
+message jpg {
+  bool fuqz = 1;
+}
+
+message jpj {
+  message jpi {
+    enum jph {
+      JPH_EPNB = 0;
+      JPH_EPNC = 1;
+    }
+
+  }
+
+  int32 furd = 1;
+  jpj.jpi.jph fure = 2;
+}
+
+message jpp {
+  message jpo {
+    enum jpn {
+      JPN_EPNZ = 0;
+      JPN_EPOA = 1;
+      JPN_EPOB = 2;
+      JPN_EPOC = 3;
+      JPN_EPOD = 4;
+      JPN_EPOE = 5;
+      JPN_EPOF = 6;
+      JPN_EPOG = 7;
+    }
+
+  }
+
+  jpp.jpo.jpn furp = 1;
+}
+
+message jps {
+  message jpr {
+    enum jpq {
+      JPQ_EPOL = 0;
+      JPQ_EPOM = 1;
+      JPQ_EPON = 2;
+      JPQ_EPOO = 3;
+      JPQ_EPOP = 4;
+      JPQ_EPOQ = 5;
+      JPQ_EPOR = 6;
+      JPQ_EPOS = 7;
+      JPQ_EPOT = 8;
+    }
+
+  }
+
+  kzn furt = 1;
+  jps.jpr.jpq furu = 2;
+  int64 furv = 3;
+}
+
+message jpv {
+  enum jpu {
+    JPU_EPPH = 0;
+    JPU_EPPI = 2;
+    JPU_EPPJ = 6;
+    JPU_EPPK = 7;
+    JPU_EPPL = 8;
+    JPU_EPPM = 14;
+  }
+
+  int32 fusk = 1;
+  repeated lhr fuse = 2;
+  repeated lcd fusg = 3;
+  int64 fusf = 4;
+  repeated jol fush = 5;
+  repeated lct fusi = 6;
+  repeated lfx fusj = 7;
+  bool fusd = 8;
+  repeated jpj fusl = 9;
+  repeated lnk fusm = 10;
+  jnx fusn = 11;
+  lkt fuso = 12;
+  jpb fusp = 13;
+  joa fusq = 14;
+  repeated lgz fusr = 15;
+}
+
+message jqb {
+  bool futa = 1;
+  repeated bool futb = 2;
+}
+
+message jtx {
+  message jtw {
+    message jte {
+      int64 fvhb = 1;
+    }
+
+    message jtk {
+      int32 fvim = 1;
+      int64 fvin = 2;
+      int64 fvio = 3;
+      int32 fvip = 4;
+    }
+
+    message jtp {
+      message jto {
+        message jtn {
+          int64 fvjc = 1;
+          repeated int64 fvje = 2;
+          int64 fvjf = 3;
+          string fvjg = 4;
+          bool fvji = 5;
+          repeated string fvjj = 6;
+          string fvjk = 7;
+        }
+
+        int64 fvjc = 1;
+        repeated int64 fvje = 2;
+        int64 fvjf = 3;
+        string fvjg = 4;
+        bool fvji = 5;
+        repeated string fvjj = 6;
+        string fvjk = 7;
+      }
+
+    }
+
+  }
+
+}
+
+message kkr {
+  int64 fyay = 1;
+}
+
+message kku {
+    bytes fybl = 1; // representing lkr
+    int64 fybm = 2;
+}
+
+message kns {
+    bool fymx = 1;
+}
+
+message knx {
+  string fynu = 1;
+  string fynv = 2;
+  string fynw = 3;
+}
+
+message kod {
+  message koc {
+    enum kob {
+      KOB_EVMJ = 0;
+      KOB_EVMK = 1;
+      KOB_EVML = 2;
+      KOB_EVMM = 3;
+      KOB_EVMN = 4;
+      KOB_EVMO = 5;
+      KOB_EVMP = 6;
+    }
+
+  }
+
+  kod.koc.kob fyoh = 1;
+  bool fyoi = 2;
+}
+
+message kpa {
+  message koz {
+    message koy {
+      int32 fyrq = 1;
+      repeated string fyrr = 2;
+      string fyrs = 3;
+      string fyrt = 4;
+    }
+
+  }
+
+  string fyrx = 1;
+  kpa.koz.koy fyry = 2;
+  int32 fyrz = 3;
+}
+
+message kpc {
+}
+
+message kqn {
+    bytes fyxe = 1; // representing kql
+    map<bool, string> fyxf = 2;
+    string fyxg = 3;
+    bytes fyxh = 4; // representing kqf
+}
+
+message kqp {
+    string fyxr = 1;
+    string fyxs = 2;
+    bytes fyxt = 3; // representing kql
+    int64 fyxu = 4;
+    bool fyxv = 5;
+    bytes fyxw = 6; // representing kqf
+    int64 fyxx = 7;
+    int32 fyxy = 8;
+    string fyya = 9;
+    string fyyb = 10;
+}
+
+message krb {
+  int32 fyzo = 1;
+}
+
+message krc {
+  int32 fyzs = 1;
+  int32 fyzt = 2;
+  int32 fyzu = 3;
+  int32 fyzv = 4;
+  int32 fyzw = 5;
+  int32 fyzx = 6;
+}
+
+message kri {
+  lar fzau = 1;
+  string fzav = 2;
+}
+
+message ksl {
+  message ksk {
+    enum ksj {
+      KSJ_EWMB = 0;
+      KSJ_EWMC = 1;
+      KSJ_EWMD = 2;
+      KSJ_EWME = 3;
+    }
+
+  }
+
+  int64 fzek = 1;
+  ksl.ksk.ksj fzel = 2;
+}
+
+message ksq {
+  repeated lgz fzeu = 1;
+}
+
+message ksx {
+}
+
+message ktw {
+  enum ktq {
+    KTQ_EWRL = 0;
+    KTQ_EWRM = 1;
+    KTQ_EWRN = 2;
+  }
+
+  message ktv {
+    message ktr {
+    }
+
+    message ktu {
+      int64 fzhq = 1;
+      repeated bool fzhs = 2;
+      int32 fzht = 3;
+      int32 fzhu = 4;
+      repeated int64 fzhw = 5;
+      int32 fzhx = 6;
+      int64 fzhy = 7;
+      int64 fzhz = 8;
+      int32 fzia = 9;
+    }
+
+  }
+
+  ktw.ktv.ktu fzik = 1;
+  ktw.ktv.ktr fzil = 2;
+}
+
+enum kzf {
+  KZF_EXYF = 0;
+  KZF_EXYG = 1;
+  KZF_EXYH = 2;
+  KZF_EXYI = 3;
+  KZF_EXYJ = 4;
+  KZF_EXYK = 5;
+  KZF_EXYL = 6;
+  KZF_EXYM = 7;
+  KZF_EXYN = 8;
+  KZF_EXYO = 9;
+  KZF_EXYP = 10;
+}
+
+enum kzn {
+  KZN_EXZQ = 0;
+  KZN_EXZR = 1;
+  KZN_EXZS = 2;
+  KZN_EXZT = 3;
+  KZN_EXZU = 4;
+  KZN_EXZV = 5;
+  KZN_EXZW = 6;
+  KZN_EXZX = 7;
+}
+
+enum kzy {
+  KZY_EYBZ = 0;
+  KZY_EYCA = 1;
+  KZY_EYCB = 2;
+  KZY_EYCC = 3;
+}
+
+enum kzz {
+  KZZ_EYCD = 0;
+  KZZ_EYCE = 1;
+  KZZ_EYCF = 2;
+  KZZ_EYCG = 3;
+  KZZ_EYCH = 4;
+  KZZ_EYCI = 5;
+  KZZ_EYCJ = 6;
+  KZZ_EYCK = 7;
+  KZZ_EYCL = 8;
+  KZZ_EYCM = 9;
+  KZZ_EYCN = 10;
+  KZZ_EYCO = 11;
+  KZZ_EYCP = 12;
+  KZZ_EYCQ = 13;
+  KZZ_EYCR = 14;
+  KZZ_EYCS = 15;
+  KZZ_EYCT = 16;
+  KZZ_EYCU = 17;
+  KZZ_EYCV = 18;
+  KZZ_EYCW = 19;
+  KZZ_EYCX = 20;
+}
+
+message lai {
+  int32 gaaf = 1;
+  kzz gaag = 2;
+  kzy gaah = 3;
+}
+
+message lar {
+  repeated lai gabk = 1;
+  int32 gabl = 2;
+  repeated lfo gabn = 3;
+  lnw gabo = 4;
+  int64 gabp = 5;
+  int64 gabq = 6;
+  int32 gabr = 7;
+  int64 gabs = 8;
+  int64 gabt = 9;
+  repeated ljv gabu = 10;
+  int64 gabv = 11;
+  int64 gabw = 12;
+}
+
+message lcd {
+  int32 gajv = 1;
+  repeated lnn gajw = 2;
+  repeated int32 gajx = 3;
+  kzf gajy = 4;
+  repeated ljk gajz = 5;
+  int32 gaka = 6;
+}
+
+message lcj {
+  bool gakz = 1;
+  int32 gala = 2;
+  bool galb = 3;
+  lep galc = 4;
+  ley gald = 5;
+  int32 gale = 6;
+  bool galf = 7;
+  bool galg = 8;
+  int32 galh = 9;
+  repeated int64 gali = 10;
+  bool galj = 11;
+  repeated int32 galk = 12;
+  int64 gall = 13;
+}
+
+message lct {
+  enum lcl {
+    LCL_EYYJ = 0;
+    LCL_EYYK = 1;
+    LCL_EYYL = 2;
+    LCL_EYYM = 4;
+    LCL_EYYN = 6;
+  }
+
+  message lcs {
+    message lcm {
+      lhy galw = 1;
+      lcj galx = 2;
+    }
+
+    message lcn {
+      repeated int32 gamb = 1;
+      repeated lcj gamc = 2;
+    }
+
+    message lcq {
+    }
+
+    message lcr {
+      int64 gamq = 1;
+      lcj gamr = 2;
+      repeated int32 gams = 3;
+      lhy gamt = 4;
+    }
+
+  }
+
+  int32 gamx = 1;
+  int32 gamy = 2;
+  lct.lcs.lcn gamz = 3;
+  lct.lcs.lcr gana = 4;
+  lct.lcs.lcq ganb = 5;
+  lct.lcs.lcm ganc = 6;
+}
+
+enum lcz {
+  LCZ_EZAS = 0;
+  LCZ_EZAT = 1;
+  LCZ_EZAU = 2;
+  LCZ_EZAV = 3;
+  LCZ_EZAW = 4;
+  LCZ_EZAX = 6;
+  LCZ_EZAY = 7;
+  LCZ_EZAZ = 9;
+  LCZ_EZBA = 10;
+  LCZ_EZBB = 11;
+  LCZ_EZBC = 12;
+  LCZ_EZBD = 13;
+  LCZ_EZBE = 14;
+}
+
+message lep {
+  string gauq = 1;
+  string gaur = 2;
+}
+
+message ley {
+  int32 gavk = 1;
+  int32 gavm = 2;
+}
+
+message lfj {
+  int32 gaxz = 2;
+  int32 gaya = 5;
+}
+
+message lfo {
+  kzy gazc = 1;
+  int32 gazd = 2;
+  int32 gaze = 3;
+  int32 gazf = 4;
+  kzz gazg = 5;
+  int32 gazh = 6;
+}
+
+message lfx {
+  message lfw {
+    message lfv {
+      repeated int64 gbay = 1;
+      repeated int64 gbaz = 2;
+      int32 gbba = 3;
+      bool gbbb = 4;
+      repeated bool gbbc = 5;
+    }
+
+  }
+
+  int32 gbbg = 1;
+  int32 gbbh = 2;
+  lfx.lfw.lfv gbbi = 3;
+  int32 gbbj = 4;
+  int32 gbbk = 5;
+  bool gbbl = 6;
+}
+
+message lgz {
+  enum lgd {
+    LGD_EZZI = 0;
+    LGD_EZZJ = 1;
+    LGD_EZZK = 3;
+  }
+
+  message lgy {
+    message lgx {
+      message lgw {
+        message lgv {
+          ley gbfb = 1;
+          lkr gbew = 2;
+          int32 gbex = 3;
+          led gbfc = 4;
+          string gbey = 5;
+          lgz.lgy.lgx.lgw.lgv.lgu.lgt gbfd = 6;
+          int32 gbez = 7;
+          string gbfa = 8;
+
+          message lgu {
+            message lgt {
+              lgz.lgy.lgx.lgw.lgv.lgu.lgt.lgs.lgq gbep = 1;
+              lgz.lgy.lgx.lgw.lgv.lgu.lgt.lgs.lgr gbeq = 2;
+              lgz.lgy.lgx.lgw.lgv.lgu.lgt.lgs.lgp gber = 3;
+              kyz gbeo = 4;
+
+              message lgs {
+                message lgq {
+                  repeated lke gbdw = 1;
+                  repeated lke gbdx = 2;
+                  kyy gbdy = 3;
+                  lho gbdz = 4;
+                  lhe gbea = 5;
+                  int32 gbeb = 6;
+                  int32 gbed = 7;
+                  lhy gbee = 8;
+                }
+                message lgr {
+                  map<bool, bool> gbei = 1;
+                  lhy gbej = 2;
+                  repeated lke gbek = 3;
+                }
+                message lgp {
+                  int32 gbdq = 1;
+                  int32 gbdr = 2;
+                  lgz.lgy.lgx.lgw.lgv.lgu.lgt.lgs.lgp.lgo.lgn gbds = 3;
+
+                  message lgo {
+                    enum lgn {
+                      LGN_FABY = 0;
+                      LGN_FABZ = 1;
+                      LGN_FACA = 2;
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+        message lgk {
+          int64 gbdc = 1;
+          int32 gbdd = 2;
+          int64 gbde = 3;
+          int64 gbdf = 4;
+          lho gbdg = 5;
+          int32 gbdh = 6;
+          kyz gbdi = 7;
+          lgz.lgy.lgx.lgw.lgk.lgj.lgi gbdj = 8;
+          int32 gbdk = 9;
+          kyx gbdm = 10;
+
+          message lgj {
+            message lgi {
+              lgz.lgy.lgx.lgw.lgk.lgj.lgi.lgh.lgf gbdp = 1;
+              lgz.lgy.lgx.lgw.lgk.lgj.lgi.lgh.lgg gbdq = 2;
+
+              message lgh {
+                message lgf {
+                  string gbci = 1;
+                  int64 gbcj = 2;
+                }
+                message lgg {
+                  string gbck = 1;
+                  int64 gbcl = 2;
+                }
+              }
+            }
+          }
+        }
+      }
+      lgz.lgy.lgx.lgw.lgk gbfn = 1;
+      lgz.lgy.lgx.lgw.lgv gbfo = 2;
+      string gbfi = 3;
+      lej gbfp = 4;
+      int32 gbfj = 5;
+      int32 gbfl = 6;
+    }
+  }
+
+  lfj gbfw = 1;
+  lgz.lgy.lgx gbfv = 2;
+  int64 gbfu = 3;
+}
+
+// Stub messages for undefined types referenced in the strongly-typed hierarchy
+message led {}
+message lej {}
+message kyz {}
+message kyy {}
+message kyx {}
+message lho {}
+message lhe {}
+message lke {}
+
+
+message lhi {
+  int32 gbhh = 1;
+  string gbhi = 2;
+  repeated int64 gbhk = 3;
+  int32 gbhl = 4;
+  repeated bool gbhm = 5;
+  int32 gbhn = 6;
+}
+
+message lhr {
+  message lhq {
+    message lhp {
+      int32 gbjg = 1;
+      int32 gbjh = 2;
+      int32 gbjj = 3;
+      repeated bool gbjk = 4;
+      int32 gbjl = 5;
+    }
+
+  }
+
+  repeated int32 gbjq = 1;
+  repeated lhr.lhq.lhp gbjr = 2;
+  bool gbjs = 3;
+  int32 gbjt = 4;
+  int32 gbju = 5;
+  repeated lhr.lhq.lhp gbjv = 6;
+  int32 gbjw = 7;
+}
+
+message lhy {
+  int32 gblu = 1;
+  int32 gblv = 2;
+  int32 gblw = 3;
+  int64 gblx = 4;
+  int32 gbly = 5;
+}
+
+message lif {
+    lkt gbnc = 1;
+    int32 gbnd = 2;
+    bytes gbne = 3; // representing leo
+    string gbnf = 4;
+    int64 gbng = 5;
+}
+
+message ljk {
+  bool gbsp = 1;
+  bool gbsq = 2;
+  bool gbsr = 3;
+  bool gbss = 4;
+}
+
+enum ljv {
+  LJV_FBCC = 0;
+  LJV_FBCD = 2;
+  LJV_FBCE = 3;
+  LJV_FBCF = 4;
+}
+
+message lkr {
+  message lkq {
+    message lkp {
+    }
+
+  }
+
+  int32 gbxg = 1;
+  repeated int32 gbxh = 2;
+  int32 gbxi = 3;
+  repeated int32 gbxj = 4;
+  repeated int32 gbxk = 5;
+  int64 gbxl = 6;
+  lkr.lkq.lkp gbxm = 7;
+  repeated int32 gbxn = 8;
+  repeated lcz gbxo = 9;
+}
+
+message lkt {
+    int32 gbxx = 1;
+    int32 gbxy = 2;
+}
+
+message lnk {
+  message lnj {
+    enum lni {
+      LNI_FBJJ = 0;
+      LNI_FBJK = 2;
+      LNI_FBJL = 3;
+    }
+
+  }
+
+  lhi gcij = 1;
+  lnk.lnj.lni gcik = 2;
+  int64 gcil = 3;
+}
+
+enum lnn {
+  LNN_FCBS = 0;
+  LNN_FCBT = 5;
+  LNN_FCBU = 8;
+}
+
+enum lnw {
+  LNW_FCEH = 0;
+  LNW_FCEI = 1;
+  LNW_FCEJ = 2;
+  LNW_FCEK = 3;
+  LNW_FCEL = 4;
+  LNW_FCEM = 5;
+  LNW_FCEN = 6;
+  LNW_FCEO = 7;
+}
+
+message loy {
+  message lox {
+    enum lov {
+      LOV_FCLM = 0;
+      LOV_FCLN = 1;
+      LOV_FCLO = 2;
+      LOV_FCLP = 3;
+    }
+
+  }
+
+  loy.lox.lov gcpa = 1;
+  int32 gcpb = 2;
+}
+
+message lpj {
+}
+
+message lsy {
+    repeated int32 gddu = 1;
+}
+
+message luq {
+  string gdkk = 1;
+  lkr gdkl = 2;
+  string gdkm = 3;
+}
+
+message luy {
+    // Empty message for inventory transaction finished
+}
+
+message lxd {
+    message lxc {
+        message lxb {
+            int32 gdwf = 1;
+            bool gdwg = 2;
+            int64 gdwh = 3;
+            int32 gdwi = 4;
+        }
+    }
+    repeated lxc.lxb gdwm = 1;
+    repeated int64 gdwn = 2;
+    repeated lxc.lxb gdwo = 3;
+}
