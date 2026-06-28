@@ -1,0 +1,1220 @@
+329281: 	private readonly ezg dqxk; // 0xE0
+329282: 	private readonly eyl dqxl; // 0xE8
+329283: 	private readonly ezu dqxm; // 0xF0
+329284: 	private readonly eyf dqxn; // 0xF8
+329285: 	protected readonly ewh dqxo; // 0x100
+329286: 	protected readonly evn dqxp; // 0x108
+329287: 	protected readonly exr dqxq; // 0x110
+329288: 	protected readonly eyt dqxr; // 0x118
+329289: 	public bool dqxs; // 0x120
+329290: 	private int dqxt; // 0x124
+329291: 	private const string dqxu = "AreaHighlight";
+329292: 	[CompilerGenerated]
+329293: 	private bool <dqxv>k__BackingField; // 0x128
+329294: 	private VisualElement dqxw; // 0x130
+329295: 	private const float dqxx = 0,3;
+329296: 	private esr dqxy; // 0x138
+329297: 	private string dqxz; // 0x140
+329298: 	private readonly Dictionary<long, int> dqya; // 0x148
+329299: 	private CartographyTooltipBuilder.CartographyTooltipInfos dqyb; // 0x150
+329300: 	private Vector2 dqyc; // 0x158
+329301: 	private const int dqyd = 742292;
+329302: 	private const int dqye = 0;
+329303: 	private const int dqyf = 6710886;
+329304: 	private const int dqyg = 10027008;
+329305: 	[CompilerGenerated]
+329306: 	private Dictionary<int, Dictionary<string, esm>> <dqyh>k__BackingField; // 0x160
+329307: 	[CompilerGenerated]
+329308: 	private List<gv> <dqyi>k__BackingField; // 0x168
+329309: 	[CompilerGenerated]
+329310: 	private Dictionary<long, ku> <dqyj>k__BackingField; // 0x170
+329311: 	private ks dqyk; // 0x178
+329312: 	private readonly Color dqyl; // 0x180
+329313: 	public eue dqym; // 0x190
+329314: 	public eue dqyn; // 0x198
+329315: 	public eue dqyo; // 0x1A0
+329316: 	public eue dqyp; // 0x1A8
+329317: 	public eue dqyq; // 0x1B0
+329318: 	public eue dqyr; // 0x1B8
+329319: 	private List<MapInformationData> dqys; // 0x1C0
+329320: 	private const float dqyt = 30;
+329321: 	private VisualElement dqyu; // 0x1C8
+329322: 	private Dictionary<est, VisualElement> dqyv; // 0x1D0
+329323: 	private CancellationTokenSource dqyw; // 0x1D8
+329324: 	private List<est> dqyx; // 0x1E0
+329325: 	private Vector2 dqyy; // 0x1E8
+329326: 	private const float dqyz = 0,4;
+329327: 	private bool dqza; // 0x1F0
+329328: 	private Dictionary<int, Dictionary<string, esi>> dqzb; // 0x1F8
+329329: 	private esi dqzc; // 0x200
+329330: 	private long dqzd; // 0x208
+329331: 	private const string dqze = "flag_custom";
+329332: 	private const string dqzf = "flag_chat";
+329333: 	private const int dqzg = 6;
+329334: 	private static readonly Color dqzh; // 0x8
+329335: 	private static readonly Color dqzi; // 0x18
+329336: 	private static readonly Color dqzj; // 0x28
+329337: 	private const int dqzk = 904;
+329338: 	protected Color dqzl; // 0x210
+329339: 	protected const float dqzm = 1,25;
+329340: 	protected CancellationTokenSource dqzn; // 0x220
+329341: 	private const int dqzo = 410;
+329342: 	private const int dqzp = 1004;
+329343: 	public const uint dqzq = 50;
+329344: 	private const int dqzr = 420;
+329345: 	private const int dqzs = 421;
+329346: 	private const int dqzt = 436;
+329347: 	private const int dqzu = 440;
+329348: 	public const int dqzv = 476;
+329349: 	public const int dqzw = 423;
+329350: 	private const int dqzx = 1;
+329351: 	private const int dqzy = 17;
+329352: 	private readonly Vector2 dqzz; // 0x228
+329353: 	private const int draa = -2;
+329354: 	[TupleElementNames(new[] { "layer", null, "assetEnabled", "assetDisabled" })]
+329355: 	private Dictionary<string, ValueTuple<euh, ValueTuple<AddressableEntry, AddressableEntry>>> drab; // 0x230
+329356: 	private readonly List<est> drac; // 0x238
+329357: 	private readonly List<est> drad; // 0x240
+329358: 	private readonly List<est> drae; // 0x248
+329359: 	private readonly List<est> draf; // 0x250
+329360: 	private readonly List<est> drag; // 0x258
+329361: 	public const int drah = 11;
+329362: 	private Dictionary<duw, eug> drai; // 0x260
+329363: 	private List<HintData> draj; // 0x268
+329364: 	private readonly Dictionary<euh, VisualElement> drak; // 0x270
+329365: 	protected bool dral; // 0x278
+329366: 	protected Vector2 dram; // 0x27C
+329367: 	protected const float dran = 0,016666666;
+329368: 	private readonly Dictionary<string, etq> drao; // 0x288
+329369: 
+329370: 	// Properties
+329371: 	public Dictionary<euh, bool> dqwi { get; }
+329372: 	public double dqwj { get; set; }
+329373: 	public double dqwk { get; set; }
+329374: 	public double dqwl { get; set; }
+329375: 	public double dqwm { get; set; }
+329376: 	public WorldMapData dqwn { get; set; }
+329377: 	public bool dqwo { get; set; }
+329378: 	public esh dqwp { get; }
+329379: 	protected virtual string dqwq { get; }
+329380: 	private bool dqxv { get; set; }
+329381: 	public Dictionary<int, Dictionary<string, esm>> dqyh { get; set; }
+329382: 	public List<gv> dqyi { get; set; }
+329383: 	public Dictionary<long, ku> dqyj { get; set; }
+329384: 	public virtual float fkbt { get; }
+329385: 
+329386: 	// Methods
+329387: 
+329388: 	// RVA: 0x1974860 Offset: 0x1973460 VA: 0x181974860
+329389: 	public void guh(int a, int b, bool c = True, bool d = True) { }
+329390: 
+329391: 	// RVA: 0x198F3B0 Offset: 0x198DFB0 VA: 0x18198F3B0
+329392: 	public void zs() { }
+329393: 
+329394: 	// RVA: 0x1989840 Offset: 0x1988440 VA: 0x181989840
+329395: 	public void ndj(string a) { }
+329396: 
+329397: 	// RVA: 0x194A610 Offset: 0x1949210 VA: 0x18194A610
+329398: 	public void bcjq() { }
+329399: 
+329400: 	// RVA: 0x194CDF0 Offset: 0x194B9F0 VA: 0x18194CDF0
+329401: 	public void bckq(bbi a) { }
+329402: 
+329403: 	// RVA: 0x197C680 Offset: 0x197B280 VA: 0x18197C680
+329404: 	private void jcw(bool a) { }
+329405: 
+329406: 	// RVA: 0x195F910 Offset: 0x195E510 VA: 0x18195F910
+329407: 	public VisualElement bcoy(euh a) { }
+329408: 
+329409: 	[CompilerGenerated]
+329410: 	// RVA: 0x13BCBB0 Offset: 0x13BB7B0 VA: 0x1813BCBB0
+329411: 	public double bcis() { }
+329412: 
+329413: 	// RVA: 0x196DD10 Offset: 0x196C910 VA: 0x18196DD10
+329414: 	private void fgy() { }
+329415: 
+329416: 	// RVA: 0x196C010 Offset: 0x196AC10 VA: 0x18196C010
+329417: 	public void eke(bool a = True) { }
+329418: 
+329419: 	// RVA: 0x1950E30 Offset: 0x194FA30 VA: 0x181950E30
+329420: 	private void bcll(Vector2 a, int b, bool c = False) { }
+329421: 
+329422: 	// RVA: 0x194BAB0 Offset: 0x194A6B0 VA: 0x18194BAB0
+329423: 	private SubAreaData bckd(int a, int b) { }
+329424: 
+329425: 	// RVA: 0x1975EB0 Offset: 0x1974AB0 VA: 0x181975EB0
+329426: 	public VisualElement haj(euh a) { }
+329427: 
+329428: 	// RVA: 0x1960D20 Offset: 0x195F920 VA: 0x181960D20
+329429: 	public void bcpk(Vector2 a, bool b = True, bool c = True) { }
+329430: 
+329431: 	// RVA: 0x194E020 Offset: 0x194CC20 VA: 0x18194E020
+329432: 	public void bckz(cmi a) { }
+329433: 
+329434: 	// RVA: 0x1986DA0 Offset: 0x19859A0 VA: 0x181986DA0
+329435: 	private void lyi(MouseDownEvent a) { }
+329436: 
+329437: 	// RVA: 0x19485D0 Offset: 0x19471D0 VA: 0x1819485D0 Slot: 4
+329438: 	public virtual void bcja(VisualElement a) { }
+329439: 
+329440: 	// RVA: 0x1989CF0 Offset: 0x19888F0 VA: 0x181989CF0
+329441: 	public VisualElement nfi(euh a) { }
+329442: 
+329443: 	// RVA: 0x1989CD0 Offset: 0x19888D0 VA: 0x181989CD0
+329444: 	private bool nfc(double a) { }
+329445: 
+329446: 	// RVA: 0x1948630 Offset: 0x1947230 VA: 0x181948630 Slot: 5
+329447: 	public virtual void bcjc(Action a) { }
+329448: 
+329449: 	// RVA: 0x197D060 Offset: 0x197BC60 VA: 0x18197D060
+329450: 	public void jhm() { }
+329451: 
+329452: 	// RVA: 0x19489A0 Offset: 0x19475A0 VA: 0x1819489A0 Slot: 6
+329453: 	public virtual void bcje(int a) { }
+329454: 
+329455: 	// RVA: 0x19847D0 Offset: 0x19833D0 VA: 0x1819847D0
+329456: 	public void lgg(string a, int b, int c) { }
+329457: 
+329458: 	// RVA: 0x1968D30 Offset: 0x1967930 VA: 0x181968D30
+329459: 	private void duf(Vector2 a) { }
+329460: 
+329461: 	// RVA: 0x195B4E0 Offset: 0x195A0E0 VA: 0x18195B4E0
+329462: 	public void ctv() { }
+329463: 
+329464: 	// RVA: 0x194F280 Offset: 0x194DE80 VA: 0x18194F280
+329465: 	private void bclf() { }
+329466: 
+329467: 	[AsyncStateMachine(typeof(eud.<UpdatePrismIcon>d__236))]
+329468: 	// RVA: 0x1958520 Offset: 0x1957120 VA: 0x181958520
+329469: 	private UniTaskVoid bcnn(ku a, bool b = True) { }
+329470: 
+329471: 	// RVA: 0x19616D0 Offset: 0x19602D0 VA: 0x1819616D0
+329472: 	public void bcpo(string a) { }
+329473: 
+329474: 	// RVA: 0x1960D20 Offset: 0x195F920 VA: 0x181960D20
+329475: 	public void eo(Vector2 a, bool b = True, bool c = True) { }
+329476: 
+329477: 	// RVA: 0x198DC90 Offset: 0x198C890 VA: 0x18198DC90
+329478: 	private void sk() { }
+329479: 
+329480: 	[CompilerGenerated]
+329481: 	// RVA: 0x704A20 Offset: 0x703620 VA: 0x180704A20 Slot: 7
+329482: 	protected virtual string bbvd() { }
+329483: 
+329484: 	// RVA: 0x19541F0 Offset: 0x1952DF0 VA: 0x1819541F0
+329485: 	private void bcmk() { }
+329486: 
+329487: 	// RVA: 0x19756B0 Offset: 0x19742B0 VA: 0x1819756B0
+329488: 	private void gwg(int a) { }
+329489: 
+329490: 	// RVA: 0x1964640 Offset: 0x1963240 VA: 0x181964640
+329491: 	private void bt(ContextMenuItem.ContextMenuItemView a, QuestData b) { }
+329492: 
+329493: 	// RVA: 0x1972710 Offset: 0x1971310 VA: 0x181972710
+329494: 	private void gil() { }
+329495: 
+329496: 	// RVA: 0x1984000 Offset: 0x1982C00 VA: 0x181984000
+329497: 	private void leg() { }
+329498: 
+329499: 	[CompilerGenerated]
+329500: 	// RVA: 0x14101D0 Offset: 0x140EDD0 VA: 0x1814101D0
+329501: 	private bool bcjt() { }
+329502: 
+329503: 	// RVA: 0x194C6C0 Offset: 0x194B2C0 VA: 0x18194C6C0
+329504: 	private List<int> bckn(List<int> a) { }
+329505: 
+329506: 	// RVA: 0x1968680 Offset: 0x1967280 VA: 0x181968680
+329507: 	private void dle() { }
+329508: 
+329509: 	// RVA: 0x1983A50 Offset: 0x1982650 VA: 0x181983A50
+329510: 	private void lbc() { }
+329511: 
+329512: 	// RVA: 0x194A920 Offset: 0x1949520 VA: 0x18194A920
+329513: 	private void bcjx(Vector2 a, CartographyTooltipBuilder.CartographyTooltipInfos b) { }
+329514: 
+329515: 	// RVA: 0x1954E20 Offset: 0x1953A20 VA: 0x181954E20
+329516: 	public void bcmo(bool a) { }
+329517: 
+329518: 	// RVA: 0x194ADD0 Offset: 0x19499D0 VA: 0x18194ADD0
+329519: 	private void bcjz() { }
+329520: 
+329521: 	// RVA: 0x198D720 Offset: 0x198C320 VA: 0x18198D720
+329522: 	private void ose(est a) { }
+329523: 
+329524: 	// RVA: 0x196A090 Offset: 0x1968C90 VA: 0x18196A090
+329525: 	public void edl(string a, float b, float c, euh d, AddressableEntry e, string f, Color g, string h, uint i, bool j = True, bool k = False, bool l = False, bool m = True) { }
+329526: 
+329527: 	// RVA: 0x1956980 Offset: 0x1955580 VA: 0x181956980
+329528: 	private void bcna(float a, float b) { }
+329529: 
+329530: 	// RVA: 0x194D070 Offset: 0x194BC70 VA: 0x18194D070
+329531: 	private void bckt() { }
+329532: 
+329533: 	// RVA: 0x1948C80 Offset: 0x1947880 VA: 0x181948C80 Slot: 8
+329534: 	public virtual void bcjg(int a, bool b = False, Action c) { }
+329535: 
+329536: 	// RVA: 0x197DA40 Offset: 0x197C640 VA: 0x18197DA40
+329537: 	private void jra(int a, string b) { }
+329538: 
+329539: 	// RVA: 0x1956CB0 Offset: 0x19558B0 VA: 0x181956CB0
+329540: 	private string bcnd(Vector2 a) { }
+329541: 
+329542: 	// RVA: 0x1982170 Offset: 0x1980D70 VA: 0x181982170
+329543: 	private void kob() { }
+329544: 
+329545: 	// RVA: 0x194FBF0 Offset: 0x194E7F0 VA: 0x18194FBF0
+329546: 	private void bclh(est a) { }
+329547: 
+329548: 	// RVA: 0x1966C10 Offset: 0x1965810 VA: 0x181966C10
+329549: 	public void ctj(long a) { }
+329550: 
+329551: 	// RVA: 0x1953BE0 Offset: 0x19527E0 VA: 0x181953BE0
+329552: 	private void bcmd(Vector2 a) { }
+329553: 
+329554: 	[AsyncStateMachine(typeof(eud.<AddAreaShape>d__135))]
+329555: 	// RVA: 0x194C010 Offset: 0x194AC10 VA: 0x18194C010
+329556: 	public UniTask<esm> bckl(int a, euh b, Color c, Color d, float e = 4, string f, bool g = False) { }
+329557: 
+329558: 	// RVA: 0x196D5E0 Offset: 0x196C1E0 VA: 0x18196D5E0
+329559: 	private void fcx(Vector2 a) { }
+329560: 
+329561: 	// RVA: 0x195B690 Offset: 0x195A290 VA: 0x18195B690
+329562: 	public est bcof(string a, float b, float c, float d, float e, double f, euh g, AddressableEntry h, string i, float j, Color k, string l, uint m, bool n = True, bool o = True) { }
+329563: 
+329564: 	// RVA: 0x194CCA0 Offset: 0x194B8A0 VA: 0x18194CCA0
+329565: 	public void bcko(bbk a) { }
+329566: 
+329567: 	// RVA: 0x1969410 Offset: 0x1968010 VA: 0x181969410
+329568: 	public void ebj(bool a) { }
+329569: 
+329570: 	[CompilerGenerated]
+329571: 	// RVA: 0x13BAAB0 Offset: 0x13B96B0 VA: 0x1813BAAB0
+329572: 	private void bcip(double a) { }
+329573: 
+329574: 	// RVA: 0x197BEF0 Offset: 0x197AAF0 VA: 0x18197BEF0
+329575: 	public void iwr() { }
+329576: 
+329577: 	// RVA: 0x1966FC0 Offset: 0x1965BC0 VA: 0x181966FC0
+329578: 	private void cvt() { }
+329579: 
+329580: 	// RVA: 0x195E710 Offset: 0x195D310 VA: 0x18195E710
+329581: 	public void bcom(string a) { }
+329582: 
+329583: 	// RVA: 0x1955290 Offset: 0x1953E90 VA: 0x181955290
+329584: 	public void bcmu(ccp a, ewl.ewk b) { }
+329585: 
+329586: 	// RVA: 0x1953F00 Offset: 0x1952B00 VA: 0x181953F00
+329587: 	private void cni(GeometryChangedEvent a) { }
+329588: 
+329589: 	// RVA: 0x194D870 Offset: 0x194C470 VA: 0x18194D870
+329590: 	private void bckw(SubAreaData a) { }
+329591: 
+329592: 	// RVA: 0x195F510 Offset: 0x195E110 VA: 0x18195F510
+329593: 	private bool bcot() { }
+329594: 
+329595: 	// RVA: 0x1982B70 Offset: 0x1981770 VA: 0x181982B70
+329596: 	private void kts(est a) { }
+329597: 
+329598: 	// RVA: 0x19503D0 Offset: 0x194EFD0 VA: 0x1819503D0
+329599: 	private void bclj() { }
+329600: 
+329601: 	// RVA: 0x198D6A0 Offset: 0x198C2A0 VA: 0x18198D6A0
+329602: 	public void orz(euh a) { }
+329603: 
+329604: 	// RVA: 0x1978D50 Offset: 0x1977950 VA: 0x181978D50
+329605: 	public void htr() { }
+329606: 
+329607: 	// RVA: 0x1964D70 Offset: 0x1963970 VA: 0x181964D70
+329608: 	private void bwa() { }
+329609: 
+329610: 	// RVA: 0x194DC10 Offset: 0x194C810 VA: 0x18194DC10
+329611: 	public void gyj(ccc a) { }
+329612: 
+329613: 	// RVA: 0x19795A0 Offset: 0x19781A0 VA: 0x1819795A0
+329614: 	private void iet(int a) { }
+329615: 
+329616: 	// RVA: 0x649C80 Offset: 0x648880 VA: 0x180649C80 Slot: 9
+329617: 	protected virtual void bcjb() { }
+329618: 
+329619: 	// RVA: 0x194A610 Offset: 0x1949210 VA: 0x18194A610
+329620: 	public void hxd() { }
+329621: 
+329622: 	// RVA: 0x195B1E0 Offset: 0x1959DE0 VA: 0x18195B1E0
+329623: 	public void bcoa(Dictionary<euh, bool> a) { }
+329624: 
+329625: 	// RVA: 0x196CE00 Offset: 0x196BA00 VA: 0x18196CE00
+329626: 	public void erz() { }
+329627: 
+329628: 	// RVA: 0x1983220 Offset: 0x1981E20 VA: 0x181983220
+329629: 	private void kvg(esi a) { }
+329630: 
+329631: 	// RVA: 0x1957F40 Offset: 0x1956B40 VA: 0x181957F40
+329632: 	private void bcnm(long a, ewl.ewk b) { }
+329633: 
+329634: 	// RVA: 0x198D3D0 Offset: 0x198BFD0 VA: 0x18198D3D0
+329635: 	private void onz(int a) { }
+329636: 
+329637: 	// RVA: 0x1947B40 Offset: 0x1946740 VA: 0x181947B40 Slot: 10
+329638: 	protected virtual void bbvi(bool a, DofusContextualMenu b) { }
+329639: 
+329640: 	// RVA: 0x1953F10 Offset: 0x1952B10 VA: 0x181953F10
+329641: 	private void bcmi(MouseUpEvent a) { }
+329642: 
+329643: 	// RVA: 0x19643E0 Offset: 0x1962FE0 VA: 0x1819643E0
+329644: 	public void bqp(string a) { }
+329645: 
+329646: 	// RVA: 0x1975F30 Offset: 0x1974B30 VA: 0x181975F30
+329647: 	private SubAreaData hdd(int a, int b) { }
+329648: 
+329649: 	// RVA: 0x1953F00 Offset: 0x1952B00 VA: 0x181953F00
+329650: 	private void lsl(GeometryChangedEvent a) { }
+329651: 
+329652: 	[AsyncStateMachine(typeof(eud.<RefreshScaleAfterLoad>d__82))]
+329653: 	// RVA: 0x1949B30 Offset: 0x1948730 VA: 0x181949B30
+329654: 	private UniTaskVoid bcjn() { }
+329655: 
+329656: 	// RVA: 0x1972120 Offset: 0x1970D20 VA: 0x181972120
+329657: 	public void gfr(DofusContextualMenu a) { }
+329658: 
+329659: 	[CompilerGenerated]
+329660: 	// RVA: 0x1962150 Offset: 0x1960D50 VA: 0x181962150
+329661: 	private void bcpv(ContextMenuItem.ContextMenuItemView a) { }
+329662: 
+329663: 	// RVA: 0x19560C0 Offset: 0x1954CC0 VA: 0x1819560C0
+329664: 	public void bcmw(ccq a) { }
+329665: 
+329666: 	// RVA: 0x1947FD0 Offset: 0x1946BD0 VA: 0x181947FD0 Slot: 11
+329667: 	protected virtual DofusContextualMenu bbvk(Vector2 a) { }
+329668: 
+329669: 	// RVA: 0x1953F00 Offset: 0x1952B00 VA: 0x181953F00
+329670: 	private void dee(GeometryChangedEvent a) { }
+329671: 
+329672: 	// RVA: 0x1970400 Offset: 0x196F000 VA: 0x181970400
+329673: 	public void fqf() { }
+329674: 
+329675: 	// RVA: 0x1972240 Offset: 0x1970E40 VA: 0x181972240
+329676: 	public VisualElement ghk(euh a, int b = -1) { }
+329677: 
+329678: 	// RVA: 0x1952FE0 Offset: 0x1951BE0 VA: 0x181952FE0
+329679: 	private void bclw() { }
+329680: 
+329681: 	// RVA: 0x1957E20 Offset: 0x1956A20 VA: 0x181957E20
+329682: 	public void map(cco a, ewl.ewk b) { }
+329683: 
+329684: 	// RVA: 0x194DC10 Offset: 0x194C810 VA: 0x18194DC10
+329685: 	public void bckx(ccc a) { }
+329686: 
+329687: 	// RVA: 0x195E1E0 Offset: 0x195CDE0 VA: 0x18195E1E0
+329688: 	public void bcol(kx a) { }
+329689: 
+329690: 	// RVA: 0x1953820 Offset: 0x1952420 VA: 0x181953820
+329691: 	private void bcma(WheelEvent a) { }
+329692: 
+329693: 	// RVA: 0x19569A0 Offset: 0x19555A0 VA: 0x1819569A0
+329694: 	private int bcnb(int a) { }
+329695: 
+329696: 	// RVA: 0x194CF00 Offset: 0x194BB00 VA: 0x18194CF00
+329697: 	public void bckr(bbl a) { }
+329698: 
+329699: 	// RVA: 0x19706B0 Offset: 0x196F2B0 VA: 0x1819706B0
+329700: 	private void fr(Vector2 a) { }
+329701: 
+329702: 	// RVA: 0x1953DB0 Offset: 0x19529B0 VA: 0x181953DB0
+329703: 	private void bcme(MouseMoveEvent a) { }
+329704: 
+329705: 	// RVA: 0x195D390 Offset: 0x195BF90 VA: 0x18195D390
+329706: 	public void bcoj(List<iw> a) { }
+329707: 
+329708: 	// RVA: 0x198D590 Offset: 0x198C190 VA: 0x18198D590
+329709: 	public void op(bbi a) { }
+329710: 
+329711: 	// RVA: 0x195B3A0 Offset: 0x1959FA0 VA: 0x18195B3A0
+329712: 	public est bcob(esj a) { }
+329713: 
+329714: 	[CompilerGenerated]
+329715: 	// RVA: 0x6FC660 Offset: 0x6FB260 VA: 0x1806FC660
+329716: 	public bool bciw() { }
+329717: 
+329718: 	// RVA: 0x1952710 Offset: 0x1951310 VA: 0x181952710
+329719: 	private void bcls(ContextMenuItem.ContextMenuItemView a, QuestData b) { }
+329720: 
+329721: 	// RVA: 0x1965130 Offset: 0x1963D30 VA: 0x181965130
+329722: 	public void byr(string a) { }
+329723: 
+329724: 	// RVA: 0x19547A0 Offset: 0x19533A0 VA: 0x1819547A0
+329725: 	private bool bcml(string a, string b) { }
+329726: 
+329727: 	// RVA: 0x1965D40 Offset: 0x1964940 VA: 0x181965D40
+329728: 	protected void ciy(DofusContextualMenu a) { }
+329729: 
+329730: 	// RVA: 0x19527B0 Offset: 0x19513B0 VA: 0x1819527B0
+329731: 	private void bclt(MouseDownEvent a) { }
+329732: 
+329733: 	// RVA: 0x1971920 Offset: 0x1970520 VA: 0x181971920
+329734: 	private void gdg(Vector2 a, Vector2 b) { }
+329735: 
+329736: 	// RVA: 0x195FA20 Offset: 0x195E620 VA: 0x18195FA20
+329737: 	private Vector3 bcpa(Vector3 a) { }
+329738: 
+329739: 	// RVA: 0x1958E10 Offset: 0x1957A10 VA: 0x181958E10
+329740: 	private void bcnv() { }
+329741: 
+329742: 	// RVA: 0x1956450 Offset: 0x1955050 VA: 0x181956450
+329743: 	public void bcmy(ccr a) { }
+329744: 
+329745: 	[CompilerGenerated]
+329746: 	// RVA: 0x647650 Offset: 0x646250 VA: 0x180647650
+329747: 	public Dictionary<euh, bool> bcil() { }
+329748: 
+329749: 	// RVA: 0x1986CB0 Offset: 0x19858B0 VA: 0x181986CB0
+329750: 	private void lyd(GeometryChangedEvent a, eud.MoveToData b) { }
+329751: 
+329752: 	// RVA: 0x1967B30 Offset: 0x1966730 VA: 0x181967B30
+329753: 	private void czt() { }
+329754: 
+329755: 	// RVA: 0x1987B40 Offset: 0x1986740 VA: 0x181987B40
+329756: 	public void mdg() { }
+329757: 
+329758: 	// RVA: 0x196AA10 Offset: 0x1969610 VA: 0x18196AA10
+329759: 	private void ehv() { }
+329760: 
+329761: 	// RVA: 0x197E790 Offset: 0x197D390 VA: 0x18197E790
+329762: 	private void jyp(MouseLeaveEvent a) { }
+329763: 
+329764: 	// RVA: 0x198DA60 Offset: 0x198C660 VA: 0x18198DA60
+329765: 	private void oub(MouseMoveEvent a) { }
+329766: 
+329767: 	// RVA: 0x195FBE0 Offset: 0x195E7E0 VA: 0x18195FBE0
+329768: 	private void bcpb() { }
+329769: 
+329770: 	// RVA: 0x1987FA0 Offset: 0x1986BA0 VA: 0x181987FA0
+329771: 	private void mil(MouseMoveEvent a) { }
+329772: 
+329773: 	// RVA: 0x1946A90 Offset: 0x1945690 VA: 0x181946A90
+329774: 	public void .ctor(ezk a, ezr b, fbu c, fbd d, fca e, ewr f, ezg g, eyl h, ewh i, ewl j, fat k, ezu l, evn m, exr n, eyf o, ewl.ewk p, fec q, eyt r, Dictionary<long, int> s) { }
+329775: 
+329776: 	// RVA: 0x1979CD0 Offset: 0x19788D0 VA: 0x181979CD0
+329777: 	public void ihs(Dictionary<euh, bool> a) { }
+329778: 
+329779: 	// RVA: 0x1978300 Offset: 0x1976F00 VA: 0x181978300
+329780: 	private void hif(int a, int b) { }
+329781: 
+329782: 	// RVA: 0x1947AF0 Offset: 0x19466F0 VA: 0x181947AF0
+329783: 	private void mpo(euh a) { }
+329784: 
+329785: 	// RVA: 0x1956C00 Offset: 0x1955800 VA: 0x181956C00
+329786: 	private string bcnc(int a, int b) { }
+329787: 
+329788: 	// RVA: 0x196DB60 Offset: 0x196C760 VA: 0x18196DB60
+329789: 	protected void fgd(DofusContextualMenu a) { }
+329790: 
+329791: 	// RVA: 0x1956F00 Offset: 0x1955B00 VA: 0x181956F00
+329792: 	private void bcnh(int a, int b) { }
+329793: 
+329794: 	// RVA: 0x1989D50 Offset: 0x1988950 VA: 0x181989D50
+329795: 	protected void nga(DofusContextualMenu a, Vector2 b) { }
+329796: 
+329797: 	[CompilerGenerated]
+329798: 	// RVA: 0x13B97C0 Offset: 0x13B83C0 VA: 0x1813B97C0
+329799: 	private void bcin(double a) { }
+329800: 
+329801: 	// RVA: 0x1957E20 Offset: 0x1956A20 VA: 0x181957E20
+329802: 	public void bcnk(cco a, ewl.ewk b) { }
+329803: 
+329804: 	// RVA: 0x1950F20 Offset: 0x194FB20 VA: 0x181950F20
+329805: 	public void bclm(DofusContextualMenu a) { }
+329806: 
+329807: 	// RVA: 0x194E3D0 Offset: 0x194CFD0 VA: 0x18194E3D0
+329808: 	public void bcla(ku a, bool b = True) { }
+329809: 
+329810: 	// RVA: 0x1949300 Offset: 0x1947F00 VA: 0x181949300
+329811: 	protected void bcjj(VisualElement a) { }
+329812: 
+329813: 	// RVA: 0x1979E90 Offset: 0x1978A90 VA: 0x181979E90
+329814: 	public void iit(string a) { }
+329815: 
+329816: 	// RVA: 0x1956980 Offset: 0x1955580 VA: 0x181956980
+329817: 	private void kzt(float a, float b) { }
+329818: 
+329819: 	// RVA: 0x1956CD0 Offset: 0x19558D0 VA: 0x181956CD0
+329820: 	private bool bcne(Vector2 a) { }
+329821: 
+329822: 	// RVA: 0x1956EE0 Offset: 0x1955AE0 VA: 0x181956EE0
+329823: 	private bool bcng(int a, int b) { }
+329824: 
+329825: 	// RVA: 0x1956DE0 Offset: 0x19559E0 VA: 0x181956DE0
+329826: 	private List<esi> bcnf(Vector2 a) { }
+329827: 
+329828: 	// RVA: 0x1958860 Offset: 0x1957460 VA: 0x181958860
+329829: 	public void bcnr() { }
+329830: 
+329831: 	[AsyncStateMachine(typeof(eud.<DisplayWhenReady>d__214))]
+329832: 	// RVA: 0x19550C0 Offset: 0x1953CC0 VA: 0x1819550C0
+329833: 	private UniTaskVoid bcmr(bool a) { }
+329834: 
+329835: 	// RVA: 0x195F900 Offset: 0x195E500 VA: 0x18195F900
+329836: 	public void gkm(euh a) { }
+329837: 
+329838: 	// RVA: 0x197DC30 Offset: 0x197C830 VA: 0x18197DC30
+329839: 	public void jtw(kx a) { }
+329840: 
+329841: 	// RVA: 0x19538A0 Offset: 0x19524A0 VA: 0x1819538A0
+329842: 	private void bcmb(MouseDownEvent a) { }
+329843: 
+329844: 	// RVA: 0x1963080 Offset: 0x1961C80 VA: 0x181963080
+329845: 	public void blp(string a, List<MapInformationData> b, euh c, Color d, Color e) { }
+329846: 
+329847: 	// RVA: 0x1947AF0 Offset: 0x19466F0 VA: 0x181947AF0
+329848: 	private void fui(euh a) { }
+329849: 
+329850: 	// RVA: 0x19888E0 Offset: 0x19874E0 VA: 0x1819888E0
+329851: 	private void mof(Vector2 a) { }
+329852: 
+329853: 	// RVA: 0x1959230 Offset: 0x1957E30 VA: 0x181959230
+329854: 	public void bcnx() { }
+329855: 
+329856: 	// RVA: 0x1951680 Offset: 0x1950280 VA: 0x181951680
+329857: 	public void bclq(DofusContextualMenu a) { }
+329858: 
+329859: 	// RVA: 0x1959BE0 Offset: 0x19587E0 VA: 0x181959BE0
+329860: 	private void bcnz() { }
+329861: 
+329862: 	// RVA: 0x1960100 Offset: 0x195ED00 VA: 0x181960100
+329863: 	private bool bcpe(double a) { }
+329864: 
+329865: 	// RVA: 0x198A6A0 Offset: 0x19892A0 VA: 0x18198A6A0
+329866: 	private void ngo() { }
+329867: 
+329868: 	// RVA: 0x1957E20 Offset: 0x1956A20 VA: 0x181957E20
+329869: 	public void emv(cco a, ewl.ewk b) { }
+329870: 
+329871: 	[CompilerGenerated]
+329872: 	// RVA: 0x13BCBC0 Offset: 0x13BB7C0 VA: 0x1813BCBC0
+329873: 	private void bcit(double a) { }
+329874: 
+329875: 	// RVA: 0x194CFD0 Offset: 0x194BBD0 VA: 0x18194CFD0
+329876: 	private void bcks() { }
+329877: 
+329878: 	[CompilerGenerated]
+329879: 	// RVA: 0x194A8C0 Offset: 0x19494C0 VA: 0x18194A8C0
+329880: 	private void bcju(bool a) { }
+329881: 
+329882: 	// RVA: 0x197A230 Offset: 0x1978E30 VA: 0x18197A230
+329883: 	protected void imo(DofusContextualMenu a) { }
+329884: 
+329885: 	// RVA: 0x195B950 Offset: 0x195A550 VA: 0x18195B950
+329886: 	public void bcoh(Dictionary<Vector2, epo> a) { }
+329887: 
+329888: 	[CompilerGenerated]
+329889: 	// RVA: 0x15DFBD0 Offset: 0x15DE7D0 VA: 0x1815DFBD0
+329890: 	private void bckf(Dictionary<int, Dictionary<string, esm>> a) { }
+329891: 
+329892: 	// RVA: 0x196EA30 Offset: 0x196D630 VA: 0x18196EA30
+329893: 	public void fks(ku a, bool b = True) { }
+329894: 
+329895: 	// RVA: 0x195D8F0 Offset: 0x195C4F0 VA: 0x18195D8F0
+329896: 	public void bcok() { }
+329897: 
+329898: 	// RVA: 0x1986940 Offset: 0x1985540 VA: 0x181986940
+329899: 	private void lvg(MeshGenerationContext a) { }
+329900: 
+329901: 	// RVA: 0x1971B80 Offset: 0x1970780 VA: 0x181971B80
+329902: 	public VisualElement gdq(euh a, int b = -1) { }
+329903: 
+329904: 	// RVA: 0x1953380 Offset: 0x1951F80 VA: 0x181953380
+329905: 	private void bclx() { }
+329906: 
+329907: 	// RVA: 0x195EA20 Offset: 0x195D620 VA: 0x18195EA20
+329908: 	private void bcoo() { }
+329909: 
+329910: 	// RVA: 0x1955F40 Offset: 0x1954B40 VA: 0x181955F40
+329911: 	public List<esi> bcmv(int a) { }
+329912: 
+329913: 	// RVA: 0x1952870 Offset: 0x1951470 VA: 0x181952870
+329914: 	protected void bclu(DofusContextualMenu a, Vector2 b, Vector2 c) { }
+329915: 
+329916: 	[CompilerGenerated]
+329917: 	// RVA: 0x15DFBC0 Offset: 0x15DE7C0 VA: 0x1815DFBC0
+329918: 	public Dictionary<int, Dictionary<string, esm>> bcke() { }
+329919: 
+329920: 	// RVA: 0x1987D90 Offset: 0x1986990 VA: 0x181987D90
+329921: 	private void mft() { }
+329922: 
+329923: 	// RVA: 0x1947AF0 Offset: 0x19466F0 VA: 0x181947AF0
+329924: 	private void fbi(euh a) { }
+329925: 
+329926: 	// RVA: 0x1966740 Offset: 0x1965340 VA: 0x181966740
+329927: 	private bool cqx(Vector2 a) { }
+329928: 
+329929: 	// RVA: 0x1987510 Offset: 0x1986110 VA: 0x181987510
+329930: 	private void mbs() { }
+329931: 
+329932: 	// RVA: 0x1981710 Offset: 0x1980310 VA: 0x181981710
+329933: 	private void kkm(SubAreaData a) { }
+329934: 
+329935: 	// RVA: 0x195F900 Offset: 0x195E500 VA: 0x18195F900
+329936: 	public void bcox(euh a) { }
+329937: 
+329938: 	// RVA: 0x195B480 Offset: 0x195A080 VA: 0x18195B480
+329939: 	private void jmu(bool a) { }
+329940: 
+329941: 	// RVA: 0x195F970 Offset: 0x195E570 VA: 0x18195F970
+329942: 	public VisualElement bcoz(euh a) { }
+329943: 
+329944: 	// RVA: 0x1969710 Offset: 0x1968310 VA: 0x181969710
+329945: 	private void ecp() { }
+329946: 
+329947: 	// RVA: 0x194BCF0 Offset: 0x194A8F0 VA: 0x18194BCF0
+329948: 	public void bckk() { }
+329949: 
+329950: 	// RVA: 0x1989020 Offset: 0x1987C20 VA: 0x181989020
+329951: 	private void mt() { }
+329952: 
+329953: 	[CompilerGenerated]
+329954: 	// RVA: 0x1962190 Offset: 0x1960D90 VA: 0x181962190
+329955: 	private bool bcpx() { }
+329956: 
+329957: 	// RVA: 0x1974D60 Offset: 0x1973960 VA: 0x181974D60
+329958: 	protected void gwb(DofusContextualMenu a, Vector2 b) { }
+329959: 
+329960: 	// RVA: 0x19585B0 Offset: 0x19571B0 VA: 0x1819585B0
+329961: 	private void bcno(int a) { }
+329962: 
+329963: 	// RVA: 0x1958A30 Offset: 0x1957630 VA: 0x181958A30
+329964: 	private void bcnt(MeshGenerationContext a) { }
+329965: 
+329966: 	// RVA: 0x19794C0 Offset: 0x19780C0 VA: 0x1819794C0
+329967: 	public void idk(string a, string b = "worldMap") { }
+329968: 
+329969: 	// RVA: 0x195F460 Offset: 0x195E060 VA: 0x18195F460
+329970: 	protected bool bcos(euh a) { }
+329971: 
+329972: 	// RVA: 0x194D660 Offset: 0x194C260 VA: 0x18194D660
+329973: 	private void bckv() { }
+329974: 
+329975: 	// RVA: 0x194DC50 Offset: 0x194C850 VA: 0x18194DC50
+329976: 	private void bcky() { }
+329977: 
+329978: 	// RVA: 0x1957190 Offset: 0x1955D90 VA: 0x181957190
+329979: 	private void bcni() { }
+329980: 
+329981: 	[AsyncStateMachine(typeof(eud.<<UpdateIcons>b__157_0>d))]
+329982: 	[CompilerGenerated]
+329983: 	// RVA: 0x19620A0 Offset: 0x1960CA0 VA: 0x1819620A0
+329984: 	private UniTask bcpt() { }
+329985: 
+329986: 	// RVA: 0x194AB80 Offset: 0x1949780 VA: 0x18194AB80
+329987: 	private CartographyTooltipBuilder.CartographyTooltipInfos bcjy(Vector2 a) { }
+329988: 
+329989: 	// RVA: 0x19881C0 Offset: 0x1986DC0 VA: 0x1819881C0
+329990: 	public void mna() { }
+329991: 
+329992: 	// RVA: 0x1989A90 Offset: 0x1988690 VA: 0x181989A90
+329993: 	public void nec(int a) { }
+329994: 
+329995: 	// RVA: 0x197EFB0 Offset: 0x197DBB0 VA: 0x18197EFB0
+329996: 	private void kag() { }
+329997: 
+329998: 	// RVA: 0x194FCD0 Offset: 0x194E8D0 VA: 0x18194FCD0
+329999: 	private void bcli() { }
+330000: 
+330001: 	[CompilerGenerated]
+330002: 	// RVA: 0x1961CA0 Offset: 0x19608A0 VA: 0x181961CA0
+330003: 	private void bcpr(VisualTreeAsset a) { }
+330004: 
+330005: 	// RVA: 0x1960120 Offset: 0x195ED20 VA: 0x181960120
+330006: 	private void bcpf() { }
+330007: 
+330008: 	// RVA: 0x1983FE0 Offset: 0x1982BE0 VA: 0x181983FE0
+330009: 	private bool ldk(double a) { }
+330010: 
+330011: 	// RVA: 0x1974090 Offset: 0x1972C90 VA: 0x181974090
+330012: 	public void gtj(bbl a) { }
+330013: 
+330014: 	// RVA: 0x1957720 Offset: 0x1956320 VA: 0x181957720
+330015: 	private void bcnj() { }
+330016: 
+330017: 	[CompilerGenerated]
+330018: 	// RVA: 0x1962180 Offset: 0x1960D80 VA: 0x181962180
+330019: 	private bool bcpw() { }
+330020: 
+330021: 	// RVA: 0x1965680 Offset: 0x1964280 VA: 0x181965680
+330022: 	public void chg() { }
+330023: 
+330024: 	// RVA: 0x1947340 Offset: 0x1945F40 VA: 0x181947340
+330025: 	private void bbh(List<est> a) { }
+330026: 
+330027: 	// RVA: 0x19487F0 Offset: 0x19473F0 VA: 0x1819487F0
+330028: 	public void bcjd() { }
+330029: 
+330030: 	// RVA: 0x1966850 Offset: 0x1965450 VA: 0x181966850
+330031: 	private void ct(esi a) { }
+330032: 
+330033: 	// RVA: 0x19805B0 Offset: 0x197F1B0 VA: 0x1819805B0
+330034: 	private void kao() { }
+330035: 
+330036: 	// RVA: 0x1974010 Offset: 0x1972C10 VA: 0x181974010
+330037: 	private void gpt(WheelEvent a) { }
+330038: 
+330039: 	// RVA: 0x1978EE0 Offset: 0x1977AE0 VA: 0x181978EE0
+330040: 	private List<int> hxf(List<int> a) { }
+330041: 
+330042: 	// RVA: 0x194E8F0 Offset: 0x194D4F0 VA: 0x18194E8F0
+330043: 	public void bclb(eue a, euf b) { }
+330044: 
+330045: 	// RVA: 0x649C80 Offset: 0x648880 VA: 0x180649C80 Slot: 12
+330046: 	protected virtual void bbvf() { }
+330047: 
+330048: 	// RVA: 0x1972050 Offset: 0x1970C50 VA: 0x181972050
+330049: 	public void gdr(euh a, bool b = True) { }
+330050: 
+330051: 	// RVA: 0x1960020 Offset: 0x195EC20 VA: 0x181960020
+330052: 	private float bcpd(double a) { }
+330053: 
+330054: 	// RVA: 0x194EF40 Offset: 0x194DB40 VA: 0x18194EF40
+330055: 	private void bcle() { }
+330056: 
+330057: 	// RVA: 0x1974560 Offset: 0x1973160 VA: 0x181974560
+330058: 	private void gub(int a) { }
+330059: 
+330060: 	// RVA: 0x1953770 Offset: 0x1952370 VA: 0x181953770
+330061: 	private void bclz(MouseLeaveEvent a) { }
+330062: 
+330063: 	// RVA: 0x1961920 Offset: 0x1960520 VA: 0x181961920
+330064: 	public void bcpp(string a, int b, int c) { }
+330065: 
+330066: 	// RVA: 0x196D7B0 Offset: 0x196C3B0 VA: 0x18196D7B0
+330067: 	private void fdu(int a, string b) { }
+330068: 
+330069: 	// RVA: 0x1953710 Offset: 0x1952310 VA: 0x181953710
+330070: 	private void bcly(MouseEnterEvent a) { }
+330071: 
+330072: 	// RVA: 0x19835E0 Offset: 0x19821E0 VA: 0x1819835E0
+330073: 	private void kxk() { }
+330074: 
+330075: 	// RVA: 0x198DBB0 Offset: 0x198C7B0 VA: 0x18198DBB0
+330076: 	public void se(string a, string b = "worldMap") { }
+330077: 
+330078: 	// RVA: 0x1953F00 Offset: 0x1952B00 VA: 0x181953F00
+330079: 	private void bcmh(GeometryChangedEvent a) { }
+330080: 
+330081: 	// RVA: 0x194A610 Offset: 0x1949210 VA: 0x18194A610
+330082: 	public void giw() { }
+330083: 
+330084: 	// RVA: 0x1989220 Offset: 0x1987E20 VA: 0x181989220
+330085: 	public Point muv(int a, int b) { }
+330086: 
+330087: 	// RVA: 0x1980F10 Offset: 0x197FB10 VA: 0x181980F10
+330088: 	private void kci() { }
+330089: 
+330090: 	// RVA: 0x197A100 Offset: 0x1978D00 VA: 0x18197A100
+330091: 	private void ilo(WheelEvent a) { }
+330092: 
+330093: 	// RVA: 0x1973770 Offset: 0x1972370 VA: 0x181973770
+330094: 	private void gow() { }
+330095: 
+330096: 	// RVA: 0x1978980 Offset: 0x1977580 VA: 0x181978980
+330097: 	private void hsp(MeshGenerationContext a) { }
+330098: 
+330099: 	// RVA: 0x1958E80 Offset: 0x1957A80 VA: 0x181958E80
+330100: 	public void bcnw(long a) { }
+330101: 
+330102: 	// RVA: 0x197C340 Offset: 0x197AF40 VA: 0x18197C340
+330103: 	public void izd(string a) { }
+330104: 
+330105: 	// RVA: 0x1958D90 Offset: 0x1957990 VA: 0x181958D90
+330106: 	private void bcnu() { }
+330107: 
+330108: 	[CompilerGenerated]
+330109: 	// RVA: 0x7F9B70 Offset: 0x7F8770 VA: 0x1807F9B70
+330110: 	protected void bcix(bool a) { }
+330111: 
+330112: 	[CompilerGenerated]
+330113: 	// RVA: 0x15DFBE0 Offset: 0x15DE7E0 VA: 0x1815DFBE0
+330114: 	public List<gv> bckg() { }
+330115: 
+330116: 	[CompilerGenerated]
+330117: 	// RVA: 0x1958D90 Offset: 0x1957990 VA: 0x181958D90
+330118: 	private void bcpu(ContextMenuItem.ContextMenuItemView a) { }
+330119: 
+330120: 	// RVA: 0x1976170 Offset: 0x1974D70 VA: 0x181976170
+330121: 	public void hdt(Dictionary<Vector2, epo> a) { }
+330122: 
+330123: 	// RVA: 0x1980970 Offset: 0x197F570 VA: 0x181980970
+330124: 	public void kcf(bbl a) { }
+330125: 
+330126: 	// RVA: 0x19547D0 Offset: 0x19533D0 VA: 0x1819547D0
+330127: 	private void bcmm(esi a) { }
+330128: 
+330129: 	// RVA: 0x19588E0 Offset: 0x19574E0 VA: 0x1819588E0
+330130: 	public void bcns() { }
+330131: 
+330132: 	// RVA: 0x1975A40 Offset: 0x1974640 VA: 0x181975A40
+330133: 	public void gzu(int a, int b, bool c = True, bool d = True) { }
+330134: 
+330135: 	// RVA: 0x1971010 Offset: 0x196FC10 VA: 0x181971010
+330136: 	private void fzu() { }
+330137: 
+330138: 	// RVA: 0x1947100 Offset: 0x1945D00 VA: 0x181947100
+330139: 	private SubAreaData baz(int a, int b) { }
+330140: 
+330141: 	// RVA: 0x195B480 Offset: 0x195A080 VA: 0x18195B480
+330142: 	private void bcoc(bool a) { }
+330143: 
+330144: 	// RVA: 0x195CDE0 Offset: 0x195B9E0 VA: 0x18195CDE0
+330145: 	public void bcoi(List<mz> a) { }
+330146: 
+330147: 	// RVA: 0x1958770 Offset: 0x1957370 VA: 0x181958770
+330148: 	private CancellationToken bcnp() { }
+330149: 
+330150: 	// RVA: 0x19611E0 Offset: 0x195FDE0 VA: 0x1819611E0
+330151: 	private void bcpm(GeometryChangedEvent a, eud.MoveToData b) { }
+330152: 
+330153: 	// RVA: 0x1970F30 Offset: 0x196FB30 VA: 0x181970F30
+330154: 	public void fyh(string a, string b = "worldMap") { }
+330155: 
+330156: 	// RVA: 0x1968E30 Offset: 0x1967A30 VA: 0x181968E30
+330157: 	private List<int> dvd(List<int> a) { }
+330158: 
+330159: 	// RVA: 0x195F900 Offset: 0x195E500 VA: 0x18195F900
+330160: 	public void feu(euh a) { }
+330161: 
+330162: 	// RVA: 0x1988F60 Offset: 0x1987B60 VA: 0x181988F60
+330163: 	public void moq(bbk a) { }
+330164: 
+330165: 	// RVA: 0x195E840 Offset: 0x195D440 VA: 0x18195E840
+330166: 	private void bcon(List<est> a) { }
+330167: 
+330168: 	// RVA: 0x19823F0 Offset: 0x1980FF0 VA: 0x1819823F0
+330169: 	private void kon(Vector2 a) { }
+330170: 
+330171: 	// RVA: 0x18D5A40 Offset: 0x18D4640 VA: 0x1818D5A40 Slot: 13
+330172: 	public virtual float bbvb() { }
+330173: 
+330174: 	// RVA: 0x1967AC0 Offset: 0x19666C0 VA: 0x181967AC0
+330175: 	private void cze(MouseMoveEvent a) { }
+330176: 
+330177: 	// RVA: 0x198CCF0 Offset: 0x198B8F0 VA: 0x18198CCF0
+330178: 	private void omu(MouseUpEvent a) { }
+330179: 
+330180: 	// RVA: 0x194EB10 Offset: 0x194D710 VA: 0x18194EB10 Slot: 14
+330181: 	public virtual bool bclc() { }
+330182: 
+330183: 	// RVA: 0x1981CB0 Offset: 0x19808B0 VA: 0x181981CB0
+330184: 	private void kkx(float a) { }
+330185: 
+330186: 	// RVA: 0x196CF00 Offset: 0x196BB00 VA: 0x18196CF00
+330187: 	private void euk() { }
+330188: 
+330189: 	// RVA: 0x1960170 Offset: 0x195ED70 VA: 0x181960170
+330190: 	private void bcpg(float a) { }
+330191: 
+330192: 	// RVA: 0x1970AE0 Offset: 0x196F6E0 VA: 0x181970AE0
+330193: 	private void fsm() { }
+330194: 
+330195: 	// RVA: 0x1955090 Offset: 0x1953C90 VA: 0x181955090
+330196: 	public void bcmq(bool a = True) { }
+330197: 
+330198: 	// RVA: 0x195EF10 Offset: 0x195DB10 VA: 0x18195EF10
+330199: 	public void bcoq(euh a) { }
+330200: 
+330201: 	// RVA: 0x19842B0 Offset: 0x1982EB0 VA: 0x1819842B0
+330202: 	private void lfg(MouseLeaveEvent a) { }
+330203: 
+330204: 	// RVA: 0x1956450 Offset: 0x1955050 VA: 0x181956450
+330205: 	public void mze(ccr a) { }
+330206: 
+330207: 	// RVA: 0x1951420 Offset: 0x1950020 VA: 0x181951420
+330208: 	protected void bclp(DofusContextualMenu a, Vector2 b) { }
+330209: 
+330210: 	// RVA: 0x1948BE0 Offset: 0x19477E0 VA: 0x181948BE0 Slot: 15
+330211: 	public virtual void bcjf(WorldMapData a, bool b = False, Action c) { }
+330212: 
+330213: 	// RVA: 0x1949770 Offset: 0x1948370 VA: 0x181949770
+330214: 	private void bcjl(int a) { }
+330215: 
+330216: 	// RVA: 0x1972AD0 Offset: 0x19716D0 VA: 0x181972AD0
+330217: 	private void gjr(MouseOverEvent a) { }
+330218: 
+330219: 	[CompilerGenerated]
+330220: 	// RVA: 0x6FC5E0 Offset: 0x6FB1E0 VA: 0x1806FC5E0
+330221: 	public esh bciy() { }
+330222: 
+330223: 	// RVA: 0x194ECF0 Offset: 0x194D8F0 VA: 0x18194ECF0
+330224: 	public void bcld() { }
+330225: 
+330226: 	[AsyncStateMachine(typeof(eud.<UpdatePrismsAsync>d__139))]
+330227: 	// RVA: 0x194CD60 Offset: 0x194B960 VA: 0x18194CD60
+330228: 	private UniTaskVoid bckp(List<int> a) { }
+330229: 
+330230: 	// RVA: 0x198C2E0 Offset: 0x198AEE0 VA: 0x18198C2E0
+330231: 	private void ocs() { }
+330232: 
+330233: 	// RVA: 0x195B480 Offset: 0x195A080 VA: 0x18195B480
+330234: 	private void cxv(bool a) { }
+330235: 
+330236: 	// RVA: 0x1964510 Offset: 0x1963110 VA: 0x181964510
+330237: 	public void brs() { }
+330238: 
+330239: 	// RVA: 0x197C900 Offset: 0x197B500 VA: 0x18197C900
+330240: 	public void jdi(ku a, bool b = True) { }
+330241: 
+330242: 	// RVA: 0x19678A0 Offset: 0x19664A0 VA: 0x1819678A0
+330243: 	public void cxu(eue a, euf b) { }
+330244: 
+330245: 	// RVA: 0x195B4E0 Offset: 0x195A0E0 VA: 0x18195B4E0
+330246: 	public void bxe() { }
+330247: 
+330248: 	// RVA: 0x1956260 Offset: 0x1954E60 VA: 0x181956260
+330249: 	private void bcmx(int a, string b) { }
+330250: 
+330251: 	// RVA: 0x198ADE0 Offset: 0x19899E0 VA: 0x18198ADE0
+330252: 	public void nw(bool a = True) { }
+330253: 
+330254: 	// RVA: 0x1605650 Offset: 0x1604250 VA: 0x181605650 Slot: 16
+330255: 	protected virtual void bbve() { }
+330256: 
+330257: 	// RVA: 0x1973430 Offset: 0x1972030 VA: 0x181973430
+330258: 	public VisualElement gmq(euh a) { }
+330259: 
+330260: 	// RVA: 0x1962340 Offset: 0x1960F40 VA: 0x181962340
+330261: 	private void bdp(GeometryChangedEvent a, eud.MoveToData b) { }
+330262: 
+330263: 	[AsyncStateMachine(typeof(eud.<Display>d__76))]
+330264: 	// RVA: 0x1948FB0 Offset: 0x1947BB0 VA: 0x181948FB0
+330265: 	public UniTask bcjh(int a, bool b = False, Action c) { }
+330266: 
+330267: 	// RVA: 0x19837F0 Offset: 0x19823F0 VA: 0x1819837F0
+330268: 	private void kzg(Vector2 a, CartographyTooltipBuilder.CartographyTooltipInfos b) { }
+330269: 
+330270: 	// RVA: 0x196A830 Offset: 0x1969430 VA: 0x18196A830
+330271: 	private void egv(List<est> a) { }
+330272: 
+330273: 	// RVA: 0x1952DA0 Offset: 0x19519A0 VA: 0x181952DA0
+330274: 	public void bclv(int a) { }
+330275: 
+330276: 	// RVA: 0x1956450 Offset: 0x1955050 VA: 0x181956450
+330277: 	public void fme(ccr a) { }
+330278: 
+330279: 	// RVA: 0x1967300 Offset: 0x1965F00 VA: 0x181967300
+330280: 	public est cwz(string a, float b, float c, float d, float e, double f, euh g, AddressableEntry h, string i, float j, Color k, string l, uint m, bool n = True, bool o = True) { }
+330281: 
+330282: 	// RVA: 0x1962430 Offset: 0x1961030 VA: 0x181962430
+330283: 	private bool bjo(MouseDownEvent a) { }
+330284: 
+330285: 	// RVA: 0x194D430 Offset: 0x194C030 VA: 0x18194D430
+330286: 	public void bcku() { }
+330287: 
+330288: 	// RVA: 0x198B760 Offset: 0x198A360 VA: 0x18198B760
+330289: 	public void nym(long a) { }
+330290: 
+330291: 	// RVA: 0x1947AF0 Offset: 0x19466F0 VA: 0x181947AF0
+330292: 	private void bcou(euh a) { }
+330293: 
+330294: 	// RVA: 0x198F290 Offset: 0x198DE90 VA: 0x18198F290
+330295: 	public void uq(DofusContextualMenu a) { }
+330296: 
+330297: 	// RVA: 0x1975F10 Offset: 0x1974B10 VA: 0x181975F10
+330298: 	private bool hbm(double a) { }
+330299: 
+330300: 	// RVA: 0x19551B0 Offset: 0x1953DB0 VA: 0x1819551B0
+330301: 	public void bcmt(string a, string b = "worldMap") { }
+330302: 
+330303: 	[CompilerGenerated]
+330304: 	// RVA: 0x15DFC00 Offset: 0x15DE800 VA: 0x1815DFC00
+330305: 	private void bckj(Dictionary<long, ku> a) { }
+330306: 
+330307: 	// RVA: 0x1979B20 Offset: 0x1978720 VA: 0x181979B20
+330308: 	protected void ihe(DofusContextualMenu a) { }
+330309: 
+330310: 	// RVA: 0x195B870 Offset: 0x195A470 VA: 0x18195B870
+330311: 	private void bcog(VisualElement a, double b, double c) { }
+330312: 
+330313: 	// RVA: 0x19646E0 Offset: 0x19632E0 VA: 0x1819646E0
+330314: 	private void bte() { }
+330315: 
+330316: 	// RVA: 0x1978640 Offset: 0x1977240 VA: 0x181978640
+330317: 	private void hpu() { }
+330318: 
+330319: 	// RVA: 0x1953F70 Offset: 0x1952B70 VA: 0x181953F70
+330320: 	private void bcmj() { }
+330321: 
+330322: 	// RVA: 0x1985070 Offset: 0x1983C70 VA: 0x181985070
+330323: 	private void lpp(ContextMenuItem.ContextMenuItemView a, QuestData b) { }
+330324: 
+330325: 	// RVA: 0x1980A40 Offset: 0x197F640 VA: 0x181980A40
+330326: 	public VisualElement kcg(euh a, int b = -1) { }
+330327: 
+330328: 	// RVA: 0x1962700 Offset: 0x1961300 VA: 0x181962700
+330329: 	public void bli(bool a = True) { }
+330330: 
+330331: 	// RVA: 0x195FDE0 Offset: 0x195E9E0 VA: 0x18195FDE0
+330332: 	private void bcpc(Vector3 a) { }
+330333: 
+330334: 	// RVA: 0x196E680 Offset: 0x196D280 VA: 0x18196E680
+330335: 	public void fiu(long a) { }
+330336: 
+330337: 	[AsyncStateMachine(typeof(eud.<ToggleLayer>d__301))]
+330338: 	// RVA: 0x195F7A0 Offset: 0x195E3A0 VA: 0x18195F7A0
+330339: 	public UniTaskVoid bcov(euh a, bool b) { }
+330340: 
+330341: 	// RVA: 0x1977600 Offset: 0x1976200 VA: 0x181977600
+330342: 	public void hdu() { }
+330343: 
+330344: 	// RVA: 0x197C220 Offset: 0x197AE20 VA: 0x18197C220
+330345: 	private static string iyz(duw a) { }
+330346: 
+330347: 	// RVA: 0x1949670 Offset: 0x1948270 VA: 0x181949670
+330348: 	public void bcjk() { }
+330349: 
+330350: 	// RVA: 0x19694B0 Offset: 0x19680B0 VA: 0x1819694B0
+330351: 	private void ecl(Vector2 a, Vector2 b) { }
+330352: 
+330353: 	// RVA: 0x19877C0 Offset: 0x19863C0 VA: 0x1819877C0
+330354: 	private void mcd(Vector2 a, Vector2 b) { }
+330355: 
+330356: 	// RVA: 0x19648F0 Offset: 0x19634F0 VA: 0x1819648F0
+330357: 	private void bui(WheelEvent a) { }
+330358: 
+330359: 	// RVA: 0x197BC90 Offset: 0x197A890 VA: 0x18197BC90
+330360: 	protected void iuh(DofusContextualMenu a, Vector2 b) { }
+330361: 
+330362: 	// RVA: 0x1954EC0 Offset: 0x1953AC0 VA: 0x181954EC0
+330363: 	private Vector2Int bcmp() { }
+330364: 
+330365: 	[CompilerGenerated]
+330366: 	// RVA: 0x13B80B0 Offset: 0x13B6CB0 VA: 0x1813B80B0
+330367: 	public double bciq() { }
+330368: 
+330369: 	// RVA: 0x1978CF0 Offset: 0x19778F0 VA: 0x181978CF0
+330370: 	private void ht(MouseEnterEvent a) { }
+330371: 
+330372: 	// RVA: 0x1978E50 Offset: 0x1977A50 VA: 0x181978E50
+330373: 	private bool hwq(MouseDownEvent a) { }
+330374: 
+330375: 	[CompilerGenerated]
+330376: 	// RVA: 0x776C80 Offset: 0x775880 VA: 0x180776C80
+330377: 	private void bciv(WorldMapData a) { }
+330378: 
+330379: 	// RVA: 0x197E3F0 Offset: 0x197CFF0 VA: 0x18197E3F0
+330380: 	private void jwl(SubAreaData a) { }
+330381: 
+330382: 	// RVA: 0x1947AF0 Offset: 0x19466F0 VA: 0x181947AF0 Slot: 17
+330383: 	protected virtual void bbvg(euh a) { }
+330384: 
+330385: 	// RVA: 0x198D800 Offset: 0x198C400 VA: 0x18198D800
+330386: 	protected void oss(DofusContextualMenu a, Vector2 b) { }
+330387: 
+330388: 	// RVA: 0x19683C0 Offset: 0x1966FC0 VA: 0x1819683C0
+330389: 	private void ddn(Vector2 a) { }
+330390: 
+330391: 	// RVA: 0x194F550 Offset: 0x194E150 VA: 0x18194F550
+330392: 	private void bclg(est a) { }
+330393: 
+330394: 	// RVA: 0x1955090 Offset: 0x1953C90 VA: 0x181955090
+330395: 	public void hqy(bool a = True) { }
+330396: 
+330397: 	[AsyncStateMachine(typeof(eud.<LoadLod>d__83))]
+330398: 	// RVA: 0x1949BA0 Offset: 0x19487A0 VA: 0x181949BA0
+330399: 	private UniTask bcjo(double a, int b, Nullable<CancellationToken> c, bool d = False, bool e = False) { }
+330400: 
+330401: 	// RVA: 0x1965260 Offset: 0x1963E60 VA: 0x181965260
+330402: 	public void cbq(int a) { }
+330403: 
+330404: 	// RVA: 0x197A090 Offset: 0x1978C90 VA: 0x18197A090
+330405: 	private void ikq(MouseOverEvent a) { }
+330406: 
+330407: 	// RVA: 0x1956980 Offset: 0x1955580 VA: 0x181956980
+330408: 	private void kuj(float a, float b) { }
+330409: 
+330410: 	// RVA: 0x1956CB0 Offset: 0x19558B0 VA: 0x181956CB0
+330411: 	private string jdt(Vector2 a) { }
+330412: 
+330413: 	// RVA: 0x1951270 Offset: 0x194FE70 VA: 0x181951270
+330414: 	protected void bclo(DofusContextualMenu a) { }
+330415: 
+330416: 	// RVA: 0x1949080 Offset: 0x1947C80 VA: 0x181949080
+330417: 	private void bcji(bool a) { }
+330418: 
+330419: 	// RVA: 0x19895A0 Offset: 0x19881A0 VA: 0x1819895A0
+330420: 	protected void mxt(DofusContextualMenu a, Vector2 b) { }
+330421: 
+330422: 	// RVA: 0x1953F00 Offset: 0x1952B00 VA: 0x181953F00
+330423: 	private void hfn(GeometryChangedEvent a) { }
+330424: 
+330425: 	// RVA: 0x197B9E0 Offset: 0x197A5E0 VA: 0x18197B9E0
+330426: 	private void iof(MouseUpEvent a) { }
+330427: 
+330428: 	// RVA: 0x197E160 Offset: 0x197CD60 VA: 0x18197E160
+330429: 	public VisualElement jul(euh a) { }
+330430: 
+330431: 	// RVA: 0x1957E20 Offset: 0x1956A20 VA: 0x181957E20
+330432: 	public void fjw(cco a, ewl.ewk b) { }
+330433: 
+330434: 	// RVA: 0x198BB10 Offset: 0x198A710 VA: 0x18198BB10
+330435: 	private void oac() { }
+330436: 
+330437: 	// RVA: 0x1958810 Offset: 0x1957410 VA: 0x181958810
+330438: 	private void bcnq() { }
+330439: 
+330440: 	// RVA: 0x195F830 Offset: 0x195E430 VA: 0x18195F830
+330441: 	public void bcow(euh a, bool b = True) { }
+330442: 
+330443: 	// RVA: 0x196A3A0 Offset: 0x1968FA0 VA: 0x18196A3A0
+330444: 	public void efa(bbl a) { }
+330445: 
+330446: 	// RVA: 0x19484E0 Offset: 0x19470E0 VA: 0x1819484E0 Slot: 18
+330447: 	protected virtual void bciz() { }
+330448: 
+330449: 	// RVA: 0x19848A0 Offset: 0x19834A0 VA: 0x1819848A0
+330450: 	public void lmg(long a) { }
+330451: 
+330452: 	// RVA: 0x19798A0 Offset: 0x19784A0 VA: 0x1819798A0
+330453: 	private void ige(bool a) { }
+330454: 
+330455: 	// RVA: 0x19612D0 Offset: 0x195FED0 VA: 0x1819612D0
+330456: 	public void bcpn(string a, List<MapInformationData> b, euh c, Color d, Color e) { }
+330457: 
+330458: 	// RVA: 0x197D350 Offset: 0x197BF50 VA: 0x18197D350
+330459: 	private void jmt(Vector2 a) { }
+330460: 
+330461: 	[CompilerGenerated]
+330462: 	// RVA: 0x1962010 Offset: 0x1960C10 VA: 0x181962010
+330463: 	private bool bcps() { }
+330464: 
+330465: 	// RVA: 0x196D680 Offset: 0x196C280 VA: 0x18196D680
+330466: 	public void fdb() { }
+330467: 
+330468: 	[AsyncStateMachine(typeof(eud.<LoadCartographyImages>d__81))]
+330469: 	// RVA: 0x1949A70 Offset: 0x1948670 VA: 0x181949A70
+330470: 	private UniTask bcjm(int a, CancellationToken b) { }
+330471: 
+330472: 	// RVA: 0x1966610 Offset: 0x1965210 VA: 0x181966610
+330473: 	public void cln(string a) { }
+330474: 
+330475: 	// RVA: 0x194A8D0 Offset: 0x19494D0 VA: 0x18194A8D0
+330476: 	private void bcjv() { }
+330477: 
+330478: 	// RVA: 0x1982A70 Offset: 0x1981670 VA: 0x181982A70
+330479: 	public void kpc() { }
+330480: 
+330481: 	// RVA: 0x1970DB0 Offset: 0x196F9B0 VA: 0x181970DB0
+330482: 	public List<esi> fvn(int a) { }
+330483: 
+330484: 	// RVA: 0x197D1B0 Offset: 0x197BDB0 VA: 0x18197D1B0
+330485: 	public void jip(ccq a) { }
+330486: 
+330487: 	// RVA: 0x198CA20 Offset: 0x198B620 VA: 0x18198CA20
+330488: 	private void oex() { }
+330489: 
+330490: 	// RVA: 0x1977D20 Offset: 0x1976920 VA: 0x181977D20
+330491: 	private List<int> hhf(List<int> a) { }
+330492: 
+330493: 	// RVA: 0x1950D00 Offset: 0x194F900 VA: 0x181950D00
+330494: 	private void bclk(Vector2 a) { }
+330495: 
+330496: 	[AsyncStateMachine(typeof(eud.<CenterToPlayerPosition>d__215))]
+330497: 	// RVA: 0x1955140 Offset: 0x1953D40 VA: 0x181955140
+330498: 	private UniTaskVoid bcms() { }
+330499: 
+330500: 	// RVA: 0x194C2A0 Offset: 0x194AEA0 VA: 0x18194C2A0 Slot: 19

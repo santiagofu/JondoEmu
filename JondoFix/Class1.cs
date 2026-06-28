@@ -1,0 +1,968 @@
+using System;
+using MelonLoader;
+using HarmonyLib;
+using Il2CppThrift.Transport;
+using Il2CppZaap_CSharp_Client;
+using System.IO;
+using System.Text;
+using System.Linq;
+using Il2CppCore.DataCenter;
+using Il2CppCore.DataCenter.Metadata.World;
+
+[assembly: MelonInfo(typeof(JondoFix.JondoFixMod), "JondoFix", "1.2.0", "Jondo")]
+[assembly: MelonGame("Ankama", "Dofus")]
+
+namespace JondoFix
+{
+    public class JondoFixMod : MelonMod
+    {
+        public static bool UseLocalRedirect { get; private set; } = false;
+        public static Il2CppSystem.Net.Security.RemoteCertificateValidationCallback BypassedCallback { get; private set; }
+        public static Il2CppMono.Security.Interface.MonoRemoteCertificateValidationCallback BypassedMonoCallback { get; private set; }
+        private static bool hasDumped = false;
+
+        public override void OnInitializeMelon()
+        {
+            UseLocalRedirect = IsEmulatorActive();
+            LoggerInstance.Msg("====================================================");
+            LoggerInstance.Msg("  JONDO REDIRECTOR & FIX");
+            LoggerInstance.Msg($"  Version: 1.2.0");
+            LoggerInstance.Msg($"  Local Emulator Active? {UseLocalRedirect}");
+            if (UseLocalRedirect)
+            {
+                LoggerInstance.Msg("  [+] DNS and Socket redirection is ACTIVE");
+            }
+            else
+            {
+                LoggerInstance.Msg("  [-] Redirector is INACTIVE (Official servers bypass)");
+            }
+            LoggerInstance.Msg("====================================================");
+
+            LoggerInstance.Msg($"[JondoFix Env] ZAAP_PORT = {Environment.GetEnvironmentVariable("ZAAP_PORT")}");
+            LoggerInstance.Msg($"[JondoFix Env] ZAAP_HASH = {Environment.GetEnvironmentVariable("ZAAP_HASH")}");
+            LoggerInstance.Msg($"[JondoFix Env] ZAAP_GAME = {Environment.GetEnvironmentVariable("ZAAP_GAME")}");
+            LoggerInstance.Msg($"[JondoFix Env] ZAAP_RELEASE = {Environment.GetEnvironmentVariable("ZAAP_RELEASE")}");
+            LoggerInstance.Msg($"[JondoFix Env] ZAAP_INSTANCE_ID = {Environment.GetEnvironmentVariable("ZAAP_INSTANCE_ID")}");
+            LoggerInstance.Msg($"[JondoFix Env] ZAAP_CAN_AUTH = {Environment.GetEnvironmentVariable("ZAAP_CAN_AUTH")}");
+            
+            if (UseLocalRedirect)
+            {
+                try
+                {
+                    // Initialize IL2CPP SSL/TLS Validation Callbacks
+                    try
+                    {
+                        var myCsharpDelegate = new Func<Il2CppSystem.Object, Il2CppSystem.Security.Cryptography.X509Certificates.X509Certificate, Il2CppSystem.Security.Cryptography.X509Certificates.X509Chain, Il2CppSystem.Net.Security.SslPolicyErrors, bool>(
+                            (sender, certificate, chain, sslPolicyErrors) => {
+                                MelonLogger.Msg("[JondoFix] IL2CPP SSL validation callback hit! Returning true.");
+                                return true;
+                            }
+                        );
+                        BypassedCallback = Il2CppInterop.Runtime.DelegateSupport.ConvertDelegate<Il2CppSystem.Net.Security.RemoteCertificateValidationCallback>(myCsharpDelegate);
+                        LoggerInstance.Msg("  [+] IL2CPP SSL/TLS Validation Callback registered successfully!");
+                    }
+                    catch (Exception ex)
+                    {
+                        LoggerInstance.Error($"  [-] Failed to register IL2CPP SSL/TLS Validation Callback: {ex.Message}");
+                    }
+
+                    try
+                    {
+                        var myMonoDelegate = new Func<string, Il2CppSystem.Security.Cryptography.X509Certificates.X509Certificate, Il2CppSystem.Security.Cryptography.X509Certificates.X509Chain, Il2CppMono.Security.Interface.MonoSslPolicyErrors, bool>(
+                            (targetHost, certificate, chain, sslPolicyErrors) => {
+                                MelonLogger.Msg("[JondoFix] IL2CPP Mono SSL validation callback hit! Returning true.");
+                                return true;
+                            }
+                        );
+                        BypassedMonoCallback = Il2CppInterop.Runtime.DelegateSupport.ConvertDelegate<Il2CppMono.Security.Interface.MonoRemoteCertificateValidationCallback>(myMonoDelegate);
+                        LoggerInstance.Msg("  [+] IL2CPP Mono SSL/TLS Validation Callback registered successfully!");
+                    }
+                    catch (Exception ex)
+                    {
+                        LoggerInstance.Error($"  [-] Failed to register IL2CPP Mono SSL/TLS Validation Callback: {ex.Message}");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    LoggerInstance.Error($"[JondoFix] Failed to register manual patches for SpinProtocol: {ex.Message}");
+                }
+            }
+        }
+
+        public static void BypassSslStreamInstance(Il2CppSystem.Net.Security.SslStream stream)
+        {
+            if (stream == null) return;
+            try
+            {
+                // 1. Force the standard validationCallback
+                stream.validationCallback = BypassedCallback;
+                
+                // 2. Force the settings object fields using direct type property setters
+                var settings = stream.settings;
+                if (settings == null)
+                {
+                    settings = new Il2CppMono.Security.Interface.MonoTlsSettings();
+                    stream.settings = settings;
+                }
+
+                if (settings != null)
+                {
+                    settings.UseServicePointManagerCallback = new Il2CppSystem.Nullable<bool>(true);
+                    if (BypassedMonoCallback != null)
+                    {
+                        settings.RemoteCertificateValidationCallback = BypassedMonoCallback;
+                    }
+                    MelonLogger.Msg("[JondoFix] Set settings.UseServicePointManagerCallback to true and RemoteCertificateValidationCallback successfully!");
+                }
+            }
+            catch (Exception ex)
+            {
+                MelonLogger.Error($"[JondoFix] Error in BypassSslStreamInstance: {ex.Message}");
+            }
+        }
+
+        private static void SslStreamCtorPostfix(Il2CppSystem.Net.Security.SslStream __instance)
+        {
+            try
+            {
+                MelonLogger.Msg("[JondoFix] SslStream ctor hit via dynamic patch! Injecting bypass.");
+                BypassSslStreamInstance(__instance);
+            }
+            catch (Exception ex)
+            {
+                MelonLogger.Error($"[JondoFix] Error in SslStreamCtorPostfix: {ex.Message}");
+            }
+        }
+
+        public override void OnLateInitializeMelon()
+        {
+            if (!UseLocalRedirect) return;
+
+            LoggerInstance.Msg("[JondoFix] Late initialization starting...");
+            try
+            {
+                var harmony = new HarmonyLib.Harmony("com.jondo.fix.late");
+                
+                var bcnnMethod = typeof(Il2Cpp.eud).GetMethod("bcnn", new Type[] { typeof(Il2Cpp.ku), typeof(bool) });
+                if (bcnnMethod != null)
+                {
+                    var prefix = typeof(EudBcnnPatch).GetMethod("Prefix", System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Static);
+                    var finalizer = typeof(EudBcnnPatch).GetMethod("Finalizer", System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Static);
+                    harmony.Patch(bcnnMethod, prefix: new HarmonyMethod(prefix), finalizer: new HarmonyMethod(finalizer));
+                    LoggerInstance.Msg("[JondoFix] Successfully applied dynamic prefix and finalizer patches to eud (CartographyManager).bcnn!");
+                }
+                else
+                {
+                    LoggerInstance.Error("[JondoFix] Failed to find method eud (CartographyManager).bcnn via reflection!");
+                }
+
+                var bckuMethod = typeof(Il2Cpp.eud).GetMethod("bcku", new Type[] { });
+                if (bckuMethod != null)
+                {
+                    var prefix = typeof(EudBckuPatch).GetMethod("Prefix", System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Static);
+                    var finalizer = typeof(EudBckuPatch).GetMethod("Finalizer", System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Static);
+                    harmony.Patch(bckuMethod, prefix: new HarmonyMethod(prefix), finalizer: new HarmonyMethod(finalizer));
+                    LoggerInstance.Msg("[JondoFix] Successfully applied dynamic prefix and finalizer patches to eud (CartographyManager).bcku!");
+                }
+                else
+                {
+                    LoggerInstance.Error("[JondoFix] Failed to find method eud (CartographyManager).bcku via reflection!");
+                }
+
+                var bckpMethod = typeof(Il2Cpp.eud).GetMethods()
+                    .FirstOrDefault(m => m.Name == "bckp" && m.GetParameters().Length == 1);
+                if (bckpMethod != null)
+                {
+                    var prefix = typeof(EudBckpPatch).GetMethod("Prefix", System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Static);
+                    harmony.Patch(bckpMethod, prefix: new HarmonyMethod(prefix));
+                    LoggerInstance.Msg("[JondoFix] Successfully applied dynamic prefix patch to eud (CartographyManager).bckp!");
+                }
+                else
+                {
+                    LoggerInstance.Error("[JondoFix] Failed to find method eud (CartographyManager).bckp via reflection scan!");
+                }
+
+                var bcohMethod = typeof(Il2Cpp.eud).GetMethod("bcoh", new Type[] { typeof(Il2CppSystem.Collections.Generic.Dictionary<UnityEngine.Vector2, Il2Cpp.epo>) });
+                if (bcohMethod != null)
+                {
+                    var prefix = typeof(EudBcohPatch).GetMethod("Prefix", System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Static);
+                    harmony.Patch(bcohMethod, prefix: new HarmonyMethod(prefix));
+                    LoggerInstance.Msg("[JondoFix] Successfully applied dynamic prefix patch to eud (CartographyManager).bcoh!");
+                }
+                else
+                {
+                    LoggerInstance.Error("[JondoFix] Failed to find method eud (CartographyManager).bcoh via reflection!");
+                }
+
+                // Dynamically patch SslStream constructors to bypass SSL validations
+                try
+                {
+                    LoggerInstance.Msg("[JondoFix] Dynamically patching SslStream constructors...");
+                    var sslStreamType = typeof(Il2CppSystem.Net.Security.SslStream);
+                    var ctors = sslStreamType.GetConstructors(System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance);
+                    int patchedCount = 0;
+                    foreach (var ctor in ctors)
+                    {
+                        var parameters = ctor.GetParameters();
+                        // Skip the IntPtr pointer constructor
+                        if (parameters.Length == 1 && parameters[0].ParameterType == typeof(IntPtr))
+                            continue;
+
+                        var postfixMethod = typeof(JondoFixMod).GetMethod(nameof(SslStreamCtorPostfix), System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Static);
+                        if (postfixMethod != null)
+                        {
+                            harmony.Patch(ctor, postfix: new HarmonyMethod(postfixMethod));
+                            patchedCount++;
+                        }
+                    }
+                    LoggerInstance.Msg($"[JondoFix] Successfully dynamically patched {patchedCount} SslStream constructors!");
+                }
+                catch (Exception ex)
+                {
+                    LoggerInstance.Error($"[JondoFix] Failed to dynamically patch SslStream constructors: {ex.Message}");
+                }
+
+                // Dynamically patch SpinProtocol.CheckAuthentication
+                try
+                {
+                    LoggerInstance.Msg("[JondoFix] Dynamically patching SpinProtocol.CheckAuthentication...");
+                    var spinProtocolType = typeof(Il2CppAnkama.SpinConnection.SpinProtocol);
+                    var checkAuthMethods = spinProtocolType.GetMethods(System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.Static)
+                        .Where(m => m.Name == "CheckAuthentication").ToList();
+                    
+                    int patchedCount = 0;
+                    foreach (var method in checkAuthMethods)
+                    {
+                        var prefixMethod = typeof(SpinProtocolCheckAuthenticationPatch).GetMethod(nameof(SpinProtocolCheckAuthenticationPatch.Prefix), System.Reflection.BindingFlags.Public | System.Reflection.BindingFlags.Static);
+                        if (prefixMethod != null)
+                        {
+                            harmony.Patch(method, prefix: new HarmonyMethod(prefixMethod));
+                            patchedCount++;
+                        }
+                    }
+                    LoggerInstance.Msg($"[JondoFix] Successfully dynamically patched {patchedCount} CheckAuthentication overloads!");
+                }
+                catch (Exception ex)
+                {
+                    LoggerInstance.Error($"[JondoFix] Failed to dynamically patch SpinProtocol.CheckAuthentication: {ex.Message}");
+                }
+
+            }
+            catch (Exception ex)
+            {
+                LoggerInstance.Error($"[JondoFix] Error applying late Harmony patches: {ex}");
+            }
+
+            // Global ServicePointManager bypass
+            try
+            {
+                System.Net.ServicePointManager.ServerCertificateValidationCallback = (sender, certificate, chain, sslPolicyErrors) => true;
+                LoggerInstance.Msg("[JondoFix] Global managed ServicePointManager callback set to always return true!");
+            }
+            catch (Exception ex)
+            {
+                LoggerInstance.Error($"[JondoFix] Failed to set global managed ServicePointManager: {ex.Message}");
+            }
+        }
+
+        public override void OnUpdate()
+        {
+            if (UseLocalRedirect && !hasDumped)
+            {
+                try
+                {
+                    if (Il2CppCore.DataCenter.DataCenterModule.mapsCoordinatesDataRoot != null && 
+                        Il2CppCore.DataCenter.DataCenterModule.mapScrollActionsDataRoot != null && 
+                        Il2CppCore.DataCenter.DataCenterModule.mapsInformationDataRoot != null)
+                    {
+                        var coords = Il2CppCore.DataCenter.DataCenterModule.mapsCoordinatesDataRoot.GetObjects();
+                        var scrolls = Il2CppCore.DataCenter.DataCenterModule.mapScrollActionsDataRoot.GetObjects();
+                        var infos = Il2CppCore.DataCenter.DataCenterModule.mapsInformationDataRoot.GetObjects();
+
+                        if (coords != null && coords.Count > 0 && 
+                            scrolls != null && scrolls.Count > 0 && 
+                            infos != null && infos.Count > 0)
+                        {
+                            hasDumped = true;
+                            LoggerInstance.Msg("[JondoFix] Metadata loaded in memory. Checking if dump is needed...");
+                            
+                            bool forceDump = false;
+                            bool filesExist = File.Exists(@"C:\Jondo\map_dump_coordinates.csv") && 
+                                              File.Exists(@"C:\Jondo\map_dump_scrolls.csv") && 
+                                              File.Exists(@"C:\Jondo\map_dump_infos.csv");
+
+                            if (!filesExist || forceDump)
+                            {
+                                LoggerInstance.Msg("[JondoFix] CSV files not found. Starting metadata dump...");
+                                DumpMetadata(coords, scrolls, infos);
+                            }
+                            else
+                            {
+                                LoggerInstance.Msg("[JondoFix] Map metadata files already exist on disk. Skipping dump.");
+                            }
+                        }
+                    }
+                }
+                catch (Exception)
+                {
+                    // Ignore exceptions during early initialization frames when roots are not yet ready
+                }
+            }
+        }
+
+        private static void DumpMetadata(
+            Il2CppSystem.Collections.Generic.List<Il2CppCore.DataCenter.Metadata.World.MapsCoordinateData> coords,
+            Il2CppSystem.Collections.Generic.List<Il2CppCore.DataCenter.Metadata.World.MapScrollActionData> scrolls,
+            Il2CppSystem.Collections.Generic.List<Il2CppCore.DataCenter.Metadata.World.MapInformationData> infos)
+        {
+            try
+            {
+                MelonLogger.Msg($"[JondoFix] Coords count: {coords.Count}");
+                MelonLogger.Msg($"[JondoFix] Scrolls count: {scrolls.Count}");
+                MelonLogger.Msg($"[JondoFix] Infos count: {infos.Count}");
+
+                // Create C:\Jondo directory if it doesn't exist
+                Directory.CreateDirectory(@"C:\Jondo");
+
+                // 1. Dump Coordinates
+                using (var writer = new StreamWriter(@"C:\Jondo\map_dump_coordinates.csv"))
+                {
+                    writer.WriteLine("compressedCoords,x,y,mapIds");
+                    for (int i = 0; i < coords.Count; i++)
+                    {
+                        var item = coords[i];
+                        var sb = new System.Text.StringBuilder();
+                        if (item.mapIds != null)
+                        {
+                            for (int j = 0; j < item.mapIds.Count; j++)
+                            {
+                                if (j > 0) sb.Append(";");
+                                sb.Append(item.mapIds[j]);
+                            }
+                        }
+                        writer.WriteLine($"{item.compressedCoords},{item.x},{item.y},{sb.ToString()}");
+                    }
+                }
+                MelonLogger.Msg("[JondoFix] Wrote map_dump_coordinates.csv successfully.");
+
+                // 2. Dump Scrolls
+                using (var writer = new StreamWriter(@"C:\Jondo\map_dump_scrolls.csv"))
+                {
+                    writer.WriteLine("mapId,rightMapId,bottomMapId,leftMapId,topMapId");
+                    for (int i = 0; i < scrolls.Count; i++)
+                    {
+                        var item = scrolls[i];
+                        writer.WriteLine($"{item.id},{item.rightMapId},{item.bottomMapId},{item.leftMapId},{item.topMapId}");
+                    }
+                }
+                MelonLogger.Msg("[JondoFix] Wrote map_dump_scrolls.csv successfully.");
+
+                // 3. Dump Infos
+                using (var writer = new StreamWriter(@"C:\Jondo\map_dump_infos.csv"))
+                {
+                    writer.WriteLine("mapId,posX,posY,subAreaId,outdoor,name");
+                    for (int i = 0; i < infos.Count; i++)
+                    {
+                        var item = infos[i];
+                        string cleanName = item.name != null ? item.name.Replace(",", " ").Replace("\n", " ").Replace("\r", " ") : "";
+                        writer.WriteLine($"{item.id},{item.posX},{item.posY},{item.subAreaId},{item.outdoor},{cleanName}");
+                    }
+                }
+                MelonLogger.Msg("[JondoFix] Wrote map_dump_infos.csv successfully.");
+                MelonLogger.Msg("[JondoFix] ALL METADATA DUMPED SUCCESSFULLY!");
+            }
+            catch (Exception ex)
+            {
+                MelonLogger.Msg($"[JondoFix] Error during metadata dump: {ex}");
+            }
+        }
+
+        private static bool IsEmulatorActive()
+        {
+            try
+            {
+                using (var tcp = new System.Net.Sockets.TcpClient())
+                {
+                    var ar = tcp.BeginConnect("127.0.0.1", 8888, null, null);
+                    if (ar.AsyncWaitHandle.WaitOne(100)) // 100ms timeout
+                    {
+                        tcp.EndConnect(ar);
+                        return true;
+                    }
+                }
+            }
+            catch {}
+            return false;
+        }
+    }
+
+    // --- MANAGED HTTP / URI PATCHES ---
+
+    [HarmonyPatch(typeof(System.Uri), MethodType.Constructor, typeof(string))]
+    public class UriPatch
+    {
+        public static void Prefix(ref string uriString)
+        {
+            if (JondoFixMod.UseLocalRedirect && uriString != null)
+            {
+                if (uriString.Contains("haapi.ankama.com") || uriString.Contains("haapi.ankama.corp"))
+                {
+                    uriString = uriString.Replace("https://haapi.ankama.com", "http://127.0.0.1:8888")
+                                         .Replace("https://haapi.ankama.corp", "http://127.0.0.1:8888");
+                    MelonLogger.Msg($"[JondoFix] Redirected HAAPI URI to: {uriString}");
+                }
+            }
+        }
+    }
+
+    [HarmonyPatch(typeof(System.Net.Http.HttpClient), "SendAsync", new[] { typeof(System.Net.Http.HttpRequestMessage), typeof(System.Threading.CancellationToken) })]
+    public class HttpClientSendAsyncPatch
+    {
+        public static void Prefix(System.Net.Http.HttpRequestMessage request)
+        {
+            if (JondoFixMod.UseLocalRedirect && request?.RequestUri != null)
+            {
+                var uri = request.RequestUri;
+                if (uri.Host.Contains("haapi.ankama.corp") || uri.Host.Contains("haapi.ankama"))
+                {
+                    var newUri = new Uri("http://127.0.0.1:8888" + uri.PathAndQuery);
+                    MelonLogger.Msg($"[JondoFix HAAPI REDIRECT] {uri} -> {newUri}");
+                    request.RequestUri = newUri;
+                    request.Headers.Remove("Host");
+                }
+            }
+        }
+    }
+
+    // --- IL2CPP NATIVE SOCKET PATCHES ---
+
+    [HarmonyPatch(typeof(Il2CppSystem.Net.Sockets.Socket), nameof(Il2CppSystem.Net.Sockets.Socket.Connect), typeof(Il2CppSystem.Net.IPAddress), typeof(int))]
+    public class SocketConnectIPPatch
+    {
+        public static void Prefix(ref Il2CppSystem.Net.IPAddress address, ref int port)
+        {
+            if (JondoFixMod.UseLocalRedirect && address != null)
+            {
+                string ipStr = address.ToString();
+                MelonLogger.Msg($"[JondoFix] Socket connecting to IP: {ipStr}:{port}");
+                if (port == 5555 || port == 443)
+                {
+                    if (ipStr != "127.0.0.1" && ipStr != "::1")
+                    {
+                        MelonLogger.Msg($"[JondoFix] Redirecting IP Game Server to Localhost:5555!");
+                        address = Il2CppSystem.Net.IPAddress.Parse("127.0.0.1");
+                        port = 5555;
+                    }
+                }
+            }
+        }
+    }
+
+    [HarmonyPatch(typeof(Il2CppSystem.Net.Sockets.Socket), nameof(Il2CppSystem.Net.Sockets.Socket.Connect), typeof(Il2CppSystem.Net.EndPoint))]
+    public class SocketConnectEPPatch
+    {
+        public static void Prefix(ref Il2CppSystem.Net.EndPoint remoteEP)
+        {
+            if (JondoFixMod.UseLocalRedirect && remoteEP != null)
+            {
+                string epStr = remoteEP.ToString();
+                MelonLogger.Msg($"[JondoFix] Socket connecting to EndPoint: {epStr}");
+                if (epStr.Contains("ankama") || epStr.Contains("34.247.205") || epStr.Contains("54.75.207") || epStr.Contains(":5555") || epStr.Contains(":443"))
+                {
+                    MelonLogger.Msg($"[JondoFix] Redirecting Socket EndPoint to Localhost:5555!");
+                    remoteEP = new Il2CppSystem.Net.IPEndPoint(Il2CppSystem.Net.IPAddress.Parse("127.0.0.1"), 5555);
+                }
+            }
+        }
+    }
+
+    [HarmonyPatch(typeof(Il2CppSystem.Net.Sockets.Socket), nameof(Il2CppSystem.Net.Sockets.Socket.ConnectAsync), typeof(Il2CppSystem.Net.Sockets.SocketAsyncEventArgs))]
+    public class SocketConnectAsyncEventArgsPatch
+    {
+        public static void Prefix(Il2CppSystem.Net.Sockets.SocketAsyncEventArgs e)
+        {
+            if (JondoFixMod.UseLocalRedirect && e != null && e.RemoteEndPoint != null)
+            {
+                string epStr = e.RemoteEndPoint.ToString();
+                MelonLogger.Msg($"[JondoFix] Socket.ConnectAsync(SocketAsyncEventArgs) to: {epStr}");
+                if (epStr.Contains("ankama") || epStr.Contains("34.247.205") || epStr.Contains("54.75.207") || epStr.Contains(":5555") || epStr.Contains(":443"))
+                {
+                    MelonLogger.Msg($"[JondoFix] Redirecting SocketAsyncEventArgs to Localhost:5555!");
+                    e.RemoteEndPoint = new Il2CppSystem.Net.IPEndPoint(Il2CppSystem.Net.IPAddress.Parse("127.0.0.1"), 5555);
+                }
+            }
+        }
+    }
+
+    // --- IL2CPP TCPCLIENT PATCHES (USED BY SPIN NETWORK LAYER) ---
+
+    [HarmonyPatch(typeof(Il2CppSystem.Net.Sockets.TcpClient), nameof(Il2CppSystem.Net.Sockets.TcpClient.Connect), typeof(string), typeof(int))]
+    public class TcpClientConnectStringPatch
+    {
+        public static void Prefix(ref string hostname, ref int port)
+        {
+            if (JondoFixMod.UseLocalRedirect)
+            {
+                MelonLogger.Msg($"[JondoFix] TcpClient connecting to: {hostname}:{port}");
+                if (hostname != null && (hostname.Contains("ankama") || port == 5555 || port == 443))
+                {
+                    MelonLogger.Msg($"[JondoFix] Redirecting TcpClient to Localhost:5555!");
+                    hostname = "127.0.0.1";
+                    port = 5555;
+                }
+            }
+        }
+    }
+
+    [HarmonyPatch(typeof(Il2CppSystem.Net.Sockets.TcpClient), nameof(Il2CppSystem.Net.Sockets.TcpClient.Connect), typeof(Il2CppSystem.Net.IPEndPoint))]
+    public class TcpClientConnectEPPatch
+    {
+        public static void Prefix(ref Il2CppSystem.Net.IPEndPoint remoteEP)
+        {
+            if (JondoFixMod.UseLocalRedirect && remoteEP != null)
+            {
+                string epStr = remoteEP.ToString();
+                MelonLogger.Msg($"[JondoFix] TcpClient connecting to EndPoint: {epStr}");
+                if (epStr.Contains("ankama") || epStr.Contains("34.247.205") || epStr.Contains("54.75.207") || remoteEP.Port == 5555 || remoteEP.Port == 443)
+                {
+                    MelonLogger.Msg($"[JondoFix] Redirecting TcpClient EndPoint to Localhost:5555!");
+                    remoteEP = new Il2CppSystem.Net.IPEndPoint(Il2CppSystem.Net.IPAddress.Parse("127.0.0.1"), 5555);
+                }
+            }
+        }
+    }
+
+    [HarmonyPatch(typeof(Il2CppSystem.Net.Sockets.TcpClient), nameof(Il2CppSystem.Net.Sockets.TcpClient.ConnectAsync), typeof(string), typeof(int))]
+    public class TcpClientConnectAsyncStringPatch
+    {
+        public static void Prefix(ref string host, ref int port)
+        {
+            if (JondoFixMod.UseLocalRedirect)
+            {
+                MelonLogger.Msg($"[JondoFix] TcpClient.ConnectAsync to: {host}:{port}");
+                if (host != null && (host.Contains("ankama") || port == 5555 || port == 443))
+                {
+                    MelonLogger.Msg($"[JondoFix] Redirecting TcpClient.ConnectAsync to Localhost:5555!");
+                    host = "127.0.0.1";
+                    port = 5555;
+                }
+            }
+        }
+    }
+
+    [HarmonyPatch(typeof(Il2CppSystem.Net.Sockets.TcpClient), nameof(Il2CppSystem.Net.Sockets.TcpClient.BeginConnect), typeof(string), typeof(int), typeof(Il2CppSystem.AsyncCallback), typeof(Il2CppSystem.Object))]
+    public class TcpClientBeginConnectPatch
+    {
+        public static void Prefix(ref string host, ref int port)
+        {
+            if (JondoFixMod.UseLocalRedirect)
+            {
+                MelonLogger.Msg($"[JondoFix] TcpClient.BeginConnect to: {host}:{port}");
+                if (host != null && (host.Contains("ankama") || port == 5555 || port == 443))
+                {
+                    MelonLogger.Msg($"[JondoFix] Redirecting TcpClient.BeginConnect to Localhost:5555!");
+                    host = "127.0.0.1";
+                    port = 5555;
+                }
+            }
+        }
+    }
+
+    // --- OTHER HELPERS ---
+
+    [HarmonyPatch(typeof(UnityEngine.Networking.UnityWebRequest), "Get", typeof(string))]
+    public class UnityWebRequestGetPatch
+    {
+        public static void Prefix(ref string uri)
+        {
+            if (JondoFixMod.UseLocalRedirect)
+            {
+                MelonLogger.Msg($"[JondoFix] UnityWebRequest.Get: {uri}");
+                if (uri != null && uri.Contains("dofus3.json"))
+                {
+                    MelonLogger.Msg($"[JondoFix] Intercepting config download!");
+                    uri = "http://127.0.0.1:8888/config/dofus3.json";
+                }
+            }
+        }
+    }
+
+    [HarmonyPatch(typeof(UnityEngine.Networking.UnityWebRequest), "Post", typeof(string), typeof(string), typeof(string))]
+    public class UnityWebRequestPostPatch
+    {
+        public static void Prefix(string uri)
+        {
+            if (JondoFixMod.UseLocalRedirect)
+            {
+                MelonLogger.Msg($"[JondoFix] UnityWebRequest.Post: {uri}");
+            }
+        }
+    }
+
+    [HarmonyPatch(typeof(UnityEngine.Debug), nameof(UnityEngine.Debug.LogError), typeof(Il2CppSystem.Object))]
+    public class LogErrorPatch
+    {
+        public static void Prefix(Il2CppSystem.Object message)
+        {
+            if (JondoFixMod.UseLocalRedirect)
+            {
+                MelonLogger.Msg($"[DofusError] {message}");
+            }
+        }
+    }
+
+    [HarmonyPatch(typeof(UnityEngine.Debug), nameof(UnityEngine.Debug.LogException), typeof(Il2CppSystem.Exception))]
+    public class LogExceptionPatch
+    {
+        public static void Prefix(Il2CppSystem.Exception exception)
+        {
+            if (JondoFixMod.UseLocalRedirect && exception != null)
+            {
+                MelonLogger.Msg("[DofusException] ----------------------------------------------------");
+                MelonLogger.Msg($"[DofusException] Message: {exception.Message}");
+                if (!string.IsNullOrEmpty(exception.StackTrace))
+                {
+                    MelonLogger.Msg($"[DofusException] StackTrace:\n{exception.StackTrace}");
+                }
+                if (exception.InnerException != null)
+                {
+                    MelonLogger.Msg($"[DofusException] InnerException Message: {exception.InnerException.Message}");
+                }
+                MelonLogger.Msg("[DofusException] ----------------------------------------------------");
+            }
+        }
+    }
+
+    [HarmonyPatch(typeof(ZaapClient), nameof(ZaapClient.Connect), new Type[] { typeof(ZaapClient.ParametersSources) })]
+    public class ZaapClientConnectSourcePatch
+    {
+        public static void Prefix(ZaapClient.ParametersSources source)
+        {
+            if (JondoFixMod.UseLocalRedirect)
+            {
+                MelonLogger.Msg($"[JondoFix] ZaapClient.Connect(source: {source})");
+            }
+        }
+    }
+
+    [HarmonyPatch(typeof(ZaapClient), nameof(ZaapClient.Connect), new Type[] { typeof(ZaapClientParameters) })]
+    public class ZaapClientConnectParamsPatch
+    {
+        public static void Prefix(ZaapClientParameters parameters)
+        {
+            if (JondoFixMod.UseLocalRedirect)
+            {
+                if (parameters != null)
+                {
+                    MelonLogger.Msg($"[JondoFix] ZaapClient.Connect(parameters: port={parameters.port}, name={parameters.name}, release={parameters.release}, instanceId={parameters.instanceId}, hash={parameters.hash})");
+                }
+                else
+                {
+                    MelonLogger.Msg("[JondoFix] ZaapClient.Connect(parameters: null)");
+                }
+            }
+        }
+    }
+
+    [HarmonyPatch(typeof(ZaapClient), nameof(ZaapClient.Connect), new Type[] { typeof(int), typeof(string), typeof(string), typeof(int), typeof(string) })]
+    public class ZaapClientConnectExplicitPatch
+    {
+        public static void Prefix(int port, string name, string release, int instanceId, string hash)
+        {
+            if (JondoFixMod.UseLocalRedirect)
+            {
+                MelonLogger.Msg($"[JondoFix] ZaapClient.Connect(explicit: port={port}, name={name}, release={release}, instanceId={instanceId}, hash={hash})");
+            }
+        }
+    }
+
+    [HarmonyPatch(typeof(TNamedPipeClientTransport), MethodType.Constructor, new Type[] { typeof(string) })]
+    public class TNamedPipeClientTransportPatch1
+    {
+        public static void Prefix(ref string pipe)
+        {
+            if (JondoFixMod.UseLocalRedirect)
+            {
+                MelonLogger.Msg($"[JondoFix] TNamedPipeClientTransport .ctor(pipe: {pipe})");
+            }
+        }
+    }
+
+    [HarmonyPatch(typeof(TNamedPipeClientTransport), MethodType.Constructor, new Type[] { typeof(string), typeof(string) })]
+    public class TNamedPipeClientTransportPatch2
+    {
+        public static void Prefix(string server, ref string pipe)
+        {
+            if (JondoFixMod.UseLocalRedirect)
+            {
+                MelonLogger.Msg($"[JondoFix] TNamedPipeClientTransport .ctor(server: {server}, pipe: {pipe})");
+            }
+        }
+    }
+
+    // --- CARTOGRAPHY PRISM REFERENCE NULL PATCHES ---
+
+    public class EudBcnnPatch
+    {
+        public static bool Prefix(Il2Cpp.ku a, bool b)
+        {
+            if (a == null || a.Pointer == IntPtr.Zero)
+            {
+                MelonLogger.Msg("[JondoFix] eud (CartographyManager).bcnn called with null or native-null ku (Quest)! Skipping to prevent NullReferenceException crash.");
+                return false; // Return false to skip the original method!
+            }
+            return true; // Return true to run the original method
+        }
+
+        public static Exception Finalizer(Exception __exception)
+        {
+            if (__exception != null)
+            {
+                MelonLogger.Msg($"[JondoFix] Suppressed exception in eud (CartographyManager).bcnn: {__exception.Message}");
+                return null; // Suppress the exception!
+            }
+            return null;
+        }
+    }
+
+    public class EudBckuPatch
+    {
+        public static bool Prefix(Il2Cpp.eud __instance)
+        {
+            if (__instance == null || __instance.Pointer == IntPtr.Zero) return true;
+            try
+            {
+                MelonLogger.Msg("[JondoFix] eud (CartographyManager).bcku: Starting deep diagnostics...");
+
+                // Helper local function to check nullity
+                bool IsNull(Il2CppInterop.Runtime.InteropTypes.Il2CppObjectBase obj) => obj == null || obj.Pointer == IntPtr.Zero;
+
+                // 1. Diagnose public properties
+                MelonLogger.Msg($"[JondoFix] eud (CartographyManager).bcku: dqyj (Dictionary<long, ku (Quest)>) is {(IsNull(__instance.dqyj) ? "NULL" : "NOT NULL (Count: " + __instance.dqyj.Count + ")")}");
+                MelonLogger.Msg($"[JondoFix] eud (CartographyManager).bcku: dqyh (Dictionary<int, Dictionary<string, esm (CartographyArea)>>) is {(IsNull(__instance.dqyh) ? "NULL" : "NOT NULL (Count: " + __instance.dqyh.Count + ")")}");
+                MelonLogger.Msg($"[JondoFix] eud (CartographyManager).bcku: dqyi (List<gv (QuestObjective)>) is {(IsNull(__instance.dqyi) ? "NULL" : "NOT NULL (Count: " + __instance.dqyi.Count + ")")}");
+                MelonLogger.Msg($"[JondoFix] eud (CartographyManager).bcku: dqwn (WorldMapData) is {(IsNull(__instance.dqwn) ? "NULL" : "NOT NULL")}");
+                MelonLogger.Msg($"[JondoFix] eud (CartographyManager).bcku: dqwp (esh (WorldMap)) is {(IsNull(__instance.dqwp) ? "NULL" : "NOT NULL")}");
+                MelonLogger.Msg($"[JondoFix] eud (CartographyManager).bcku: dqwi (Dictionary<euh, bool>) is {(IsNull(__instance.dqwi) ? "NULL" : "NOT NULL")}");
+
+                // 2. Diagnose private fields via reflection
+                var privateFields = new string[] { "drac", "drad", "drae", "draf", "drag", "drai", "draj", "drak", "drao" };
+                foreach (var fieldName in privateFields)
+                {
+                    var fieldInfo = typeof(Il2Cpp.eud).GetField(fieldName, System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
+                    if (fieldInfo != null)
+                    {
+                        var val = fieldInfo.GetValue(__instance);
+                        bool isNullVal = val == null;
+                        if (!isNullVal && val is Il2CppInterop.Runtime.InteropTypes.Il2CppObjectBase il2cppObj)
+                        {
+                            isNullVal = il2cppObj.Pointer == IntPtr.Zero;
+                        }
+                        MelonLogger.Msg($"[JondoFix] eud (CartographyManager).bcku: Private field '{fieldName}' is {(isNullVal ? "NULL" : "NOT NULL")}");
+                    }
+                    else
+                    {
+                        MelonLogger.Msg($"[JondoFix] eud (CartographyManager).bcku: Private field '{fieldName}' NOT FOUND via reflection");
+                    }
+                }
+
+                // 3. Diagnose and clean active quests (dqyj) to prevent NullReferenceException on null quest metadata
+                if (!IsNull(__instance.dqyj))
+                {
+                    int nullValues = 0;
+                    int nullDckz = 0;
+                    int nullDclc = 0;
+                    
+                    var keys = __instance.dqyj.Keys;
+                    foreach (var key in keys)
+                    {
+                        var kuVal = __instance.dqyj[key];
+                        if (IsNull(kuVal))
+                        {
+                            nullValues++;
+                            continue;
+                        }
+                        
+                        if (IsNull(kuVal.dckz)) nullDckz++;
+                        if (IsNull(kuVal.dclc)) nullDclc++;
+                    }
+                    
+                    MelonLogger.Msg($"[JondoFix] eud (CartographyManager).bcku: dqyj (Dictionary<long, ku (Quest)>) elements diagnostic: Total={keys.Count}, NullValues={nullValues}, Null_dckz (ks)={nullDckz}, Null_dclc (me)={nullDclc}");
+                    if (nullValues > 0 || nullDckz > 0 || nullDclc > 0)
+                    {
+                        MelonLogger.Msg("[JondoFix] eud.bcku: Detected null values/nested metadata. Clearing active quests to prevent crash.");
+                        __instance.dqyj.Clear();
+                    }
+                }
+
+                // 4. Proactive initialization of null collections
+                if (IsNull(__instance.dqyj))
+                {
+                    MelonLogger.Msg("[JondoFix] eud (CartographyManager).bcku: dqyj (Dictionary<long, ku (Quest)>) is null. Initializing new Dictionary<long, ku (Quest)>...");
+                    __instance.dqyj = new Il2CppSystem.Collections.Generic.Dictionary<long, Il2Cpp.ku>();
+                }
+                if (IsNull(__instance.dqyh))
+                {
+                    MelonLogger.Msg("[JondoFix] eud (CartographyManager).bcku: dqyh (Dictionary<int, Dictionary<string, esm (CartographyArea)>>) is null. Initializing new Dictionary<int, Dictionary<string, esm (CartographyArea)>>...");
+                    __instance.dqyh = new Il2CppSystem.Collections.Generic.Dictionary<int, Il2CppSystem.Collections.Generic.Dictionary<string, Il2Cpp.esm>>();
+                }
+                if (IsNull(__instance.dqyi))
+                {
+                    MelonLogger.Msg("[JondoFix] eud (CartographyManager).bcku: dqyi (List<gv (QuestObjective)>) is null. Initializing new List<gv (QuestObjective)>...");
+                    __instance.dqyi = new Il2CppSystem.Collections.Generic.List<Il2Cpp.gv>();
+                }
+            }
+            catch (Exception ex)
+            {
+                MelonLogger.Msg($"[JondoFix] Error in eud (CartographyManager).bcku Prefix: {ex.Message}\n{ex.StackTrace}");
+            }
+            return true; // Always run the original method
+        }
+
+        public static Exception Finalizer(Exception __exception)
+        {
+            if (__exception != null)
+            {
+                MelonLogger.Msg($"[JondoFix] Suppressed exception in eud (CartographyManager).bcku: {__exception.Message}");
+                return null; // Return null to suppress the exception
+            }
+            return null;
+        }
+    }
+
+    public class EudBckpPatch
+    {
+        public static bool Prefix(Il2CppSystem.Collections.Generic.List<int> a)
+        {
+            if (a == null) return true;
+            try
+            {
+                var subAreasRoot = Il2CppCore.DataCenter.DataCenterModule.subAreasDataRoot;
+                if (subAreasRoot == null)
+                {
+                    MelonLogger.Msg("[JondoFix] eud (CartographyManager).bckp: subAreasDataRoot is null. Skipping filtering.");
+                    return true;
+                }
+
+                for (int i = a.Count - 1; i >= 0; i--)
+                {
+                    int subAreaId = a[i];
+                    var subArea = subAreasRoot.GetSubAreaById(subAreaId);
+                    if (subArea == null || subArea.Pointer == IntPtr.Zero)
+                    {
+                        MelonLogger.Msg($"[JondoFix] eud (CartographyManager).bckp: Removed invalid/null subarea ID {subAreaId} at index {i} to prevent async crash.");
+                        a.RemoveAt(i);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MelonLogger.Msg($"[JondoFix] Error filtering list in eud (CartographyManager).bckp: {ex.Message}");
+            }
+            return true;
+        }
+    }
+
+    public class SpinProtocolCheckAuthenticationPatch
+    {
+        public static bool Prefix(out Il2CppAnkama.SpinConnection.SpinProtocol.ConnectionErrors optConnError, ref bool __result)
+        {
+            MelonLogger.Msg("[JondoFix] SpinProtocol.CheckAuthentication Prefix hit! Forcing success.");
+            optConnError = Il2CppAnkama.SpinConnection.SpinProtocol.ConnectionErrors.NoneOrOtherOrUnknown;
+            __result = true;
+            return false; // Skip original validation method
+        }
+    }
+
+
+    [HarmonyPatch(typeof(Il2CppSystem.Net.Security.SslStream), "SetAndVerifyValidationCallback")]
+    public class SslStreamSetAndVerifyValidationCallbackPatch
+    { 
+        public static void Prefix(Il2CppSystem.Net.Security.SslStream __instance, ref Il2CppSystem.Net.Security.RemoteCertificateValidationCallback callback)
+        {
+            try
+            {
+                MelonLogger.Msg("[JondoFix] SslStream.SetAndVerifyValidationCallback Prefix hit! Forcing bypassed callbacks.");
+                callback = JondoFixMod.BypassedCallback;
+                JondoFixMod.BypassSslStreamInstance(__instance);
+            }
+            catch (Exception ex)
+            {
+                MelonLogger.Error($"[JondoFix] Error in SetAndVerifyValidationCallback Prefix: {ex.Message}");
+            }
+        }
+    }
+
+    [HarmonyPatch(typeof(Il2CppSystem.Net.Security.SslStream), nameof(Il2CppSystem.Net.Security.SslStream.AuthenticateAsClient), new Type[] { typeof(string), typeof(Il2CppSystem.Security.Cryptography.X509Certificates.X509CertificateCollection), typeof(Il2CppSystem.Security.Authentication.SslProtocols), typeof(bool) })]
+    public class SslStreamAuthenticateAsClientPatch
+    {
+        public static void Prefix(Il2CppSystem.Net.Security.SslStream __instance)
+        {
+            try
+            {
+                MelonLogger.Msg("[JondoFix] SslStream.AuthenticateAsClient Prefix hit! Bypassing stream.");
+                JondoFixMod.BypassSslStreamInstance(__instance);
+            }
+            catch (Exception ex)
+            {
+                MelonLogger.Error($"[JondoFix] Failed in AuthenticateAsClient Prefix: {ex.Message}");
+            }
+        }
+    }
+
+    [HarmonyPatch(typeof(Il2CppSystem.Net.Security.SslStream), nameof(Il2CppSystem.Net.Security.SslStream.BeginAuthenticateAsClient), new Type[] { typeof(string), typeof(Il2CppSystem.Security.Cryptography.X509Certificates.X509CertificateCollection), typeof(Il2CppSystem.Security.Authentication.SslProtocols), typeof(bool), typeof(Il2CppSystem.AsyncCallback), typeof(Il2CppSystem.Object) })]
+    public class SslStreamBeginAuthenticateAsClientPatch
+    {
+        public static void Prefix(Il2CppSystem.Net.Security.SslStream __instance)
+        {
+            try
+            {
+                MelonLogger.Msg("[JondoFix] SslStream.BeginAuthenticateAsClient Prefix hit! Bypassing stream.");
+                JondoFixMod.BypassSslStreamInstance(__instance);
+            }
+            catch (Exception ex)
+            {
+                MelonLogger.Error($"[JondoFix] Failed in BeginAuthenticateAsClient Prefix: {ex.Message}");
+            }
+        }
+    }
+
+    [HarmonyPatch(typeof(Il2CppSystem.Net.Security.SslStream), nameof(Il2CppSystem.Net.Security.SslStream.AuthenticateAsClientAsync), new Type[] { typeof(string), typeof(Il2CppSystem.Security.Cryptography.X509Certificates.X509CertificateCollection), typeof(Il2CppSystem.Security.Authentication.SslProtocols), typeof(bool) })]
+    public class SslStreamAuthenticateAsClientAsyncPatch
+    {
+        public static void Prefix(Il2CppSystem.Net.Security.SslStream __instance)
+        {
+            try
+            {
+                MelonLogger.Msg("[JondoFix] SslStream.AuthenticateAsClientAsync Prefix hit! Bypassing stream.");
+                JondoFixMod.BypassSslStreamInstance(__instance);
+            }
+            catch (Exception ex)
+            {
+                MelonLogger.Error($"[JondoFix] Failed in AuthenticateAsClientAsync Prefix: {ex.Message}");
+            }
+        }
+    }
+
+    public class EudBcohPatch
+    {
+        public static bool Prefix(Il2Cpp.eud __instance, Il2CppSystem.Object a)
+        {
+            MelonLogger.Msg("[JondoFix] eud (CartographyManager).bcoh called. Skipping execution to prevent NullReferenceException crash.");
+            return false; // Skip the original method completely!
+        }
+    }
+
+    // Dynamic constructor patching replaced static SslStreamCtorPatches
+
+    [HarmonyPatch(typeof(Il2CppSystem.Net.ServicePointManager), "get_ServerCertificateValidationCallback")]
+    public class ServicePointManagerGetServerCertificateValidationCallbackPatch
+    {
+        public static bool Prefix(ref Il2CppSystem.Net.Security.RemoteCertificateValidationCallback __result)
+        {
+            __result = JondoFixMod.BypassedCallback;
+            return false; // Skip original getter
+        }
+    }
+}
+
