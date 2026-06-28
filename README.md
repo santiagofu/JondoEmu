@@ -2,6 +2,29 @@
 
 Este repositorio contiene la arquitectura completa del emulador local **Jondo** diseñado para el cliente Unity de Dofus (versión 3.6.4.3), así como el mod cliente **JondoFix** para MelonLoader.
 
+## 📊 Estado de la Emulación
+
+### ✅ Funcionalidades Completadas / Emuladas
+- [x] **Emulación cliente-servidor-autenticación** (Zaap, HAAPI, Connection Server)
+- [x] **Elección de servidor**
+- [x] **Elección de personaje**
+- [x] **Carga de mundo (World / Game Node)**
+- [x] **Spawn del personaje**
+- [x] **Hover del nombre del personaje**
+- [x] **Movimiento**
+- [x] **Persistencia de la última casilla y mapa** en base de datos
+- [x] **Cambio de mapa**
+- [x] **Carga del mapa**
+- [x] **Cálculo de mapas adyacentes**
+
+### 🚧 En Desarrollo (Work In Progress)
+- [ ] **Sistema de Inventario**
+- [ ] **Características del personaje (stats)**
+- [ ] **NPCs y diálogos**
+
+---
+
+
 ## 📂 Estructura del Repositorio
 
 * **`Jondo Emulator Launcher.exe`** (en la raíz): Ejecutable compilado listo para iniciar el servidor del emulador local (con todas sus DLLs dependientes y la carpeta `runtimes/`).
